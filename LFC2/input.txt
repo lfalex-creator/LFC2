@@ -1,0 +1,3 @@
+int Ana;
+string David;
+Ana = 5;
