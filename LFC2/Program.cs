@@ -25,15 +25,16 @@ class Program
         IEnumerable<IToken> tokens = lexer.GetAllTokens();
         lexer.Reset();
 
-        Console.WriteLine("Tokens: ");
+
+        File.WriteAllText("../../../tokens.txt", "Tokens:\n");
         foreach (var token in tokens)
         {
-            Console.WriteLine($"<" +
+            File.AppendAllText("../../../tokens.txt", $"<" +
                 $"{lexer.Vocabulary.GetSymbolicName(token.Type)}, " +
-                $"{token.Text}" +
-                $">");
+                $"{token.Text}, " + $"{token.Line}" +
+                $">\n");
         }
-        Console.WriteLine("");
+        //File.WriteAllText("../../../tokens.txt", "");
     }
 
 

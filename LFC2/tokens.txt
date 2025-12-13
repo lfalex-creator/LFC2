@@ -1,0 +1,11 @@
+Tokens:
+<INT, int, 1>
+<VARIABLE_NAME, Ana, 1>
+<EOL, ;, 1>
+<STRING, string, 2>
+<VARIABLE_NAME, David, 2>
+<EOL, ;, 2>
+<VARIABLE_NAME, Ana, 3>
+<ASGN, =, 3>
+<INT_NUMBER, 5, 3>
+<EOL, ;, 3>

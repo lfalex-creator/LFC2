@@ -15,3 +15,4 @@ C:\Users\lupuf\Git-projects\LFC2\LFC2\obj\Debug\net8.0\ref\LFC2.dll
 C:\Users\lupuf\Git-projects\LFC2\LFC2\obj\Debug\net8.0\LFC2.csproj.AssemblyReference.cache
 C:\Users\lupuf\Git-projects\LFC2\LFC2\bin\Debug\net8.0\Antlr4.Runtime.Standard.dll
 C:\Users\lupuf\Git-projects\LFC2\LFC2\obj\Debug\net8.0\LFC2.csproj.Up2Date
+C:\Users\lupuf\Git-projects\LFC2\LFC2\obj\Debug\net8.0\LFC2.sourcelink.json
