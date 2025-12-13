@@ -1,16 +1,50 @@
 grammar OurCompiler;
 
-program: expression EOF;
-expression: (var_declar_expr | var_assign_expr) EOL expression?;
-var_declar_expr: (INT | STRING | FLOAT | DOUBLE) VARIABLE_NAME;
-var_assign_expr:
-	VARIABLE_NAME ASGN (
-		INT_NUMBER
-		| FLOAT_NUMBER
-		| DOUBLE_NUMBER
-		| STRING_LITERAL
-	);
+pure_data:
+	INT_NUMBER
+	| FLOAT_NUMBER
+	| DOUBLE_NUMBER
+	| STRING_LITERAL;
+data_type: INT | STRING | FLOAT | DOUBLE;
 
+program: expression_generator EOF;
+
+expression_generator: expression*;
+
+expression: (
+		var_declar_expr
+		| var_assign_expr
+		| var_decl_assg_expr
+		| crement_expr
+	) EOL
+	| (if_expr | for_expr);
+
+var_declar_expr: data_type VARIABLE_NAME;
+
+var_assign_expr: VARIABLE_NAME ASGN (pure_data | VARIABLE_NAME);
+
+var_decl_assg_expr:
+	data_type VARIABLE_NAME ASGN (pure_data | VARIABLE_NAME);
+
+comp_val: VARIABLE_NAME | pure_data;
+comparer: LESS | GREAT | EQ | NEQ | LESSOREQ | GREATOREQ;
+logic_link: AND | OR;
+logic_expr: (comp_val comparer comp_val (logic_link logic_expr)?)
+	| (
+		NOT LPAR comp_val comparer comp_val (
+			logic_link logic_expr
+		)? RPAR
+	);
+if_expr:
+	IF LPAR logic_expr RPAR (
+		expression
+		| LGROUP expression_generator RGROUP
+	) (ELSE (expression | LGROUP expression_generator RGROUP))?;
+
+crement_expr: VARIABLE_NAME (INCREMENT | DECREMENT);
+
+for_expr:
+	FOR LPAR (var_assign_expr | var_decl_assg_expr) EOL logic_expr EOL crement_expr RPAR;
 /*Helpers
  
  */

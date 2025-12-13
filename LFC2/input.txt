@@ -1,3 +1,4 @@
-int Ana;
-string David;
-Ana = 5;
+int s=0;
+for(int i=1;i<=5;i++)
+	s=s+i;
+s=s*2;

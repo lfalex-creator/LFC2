@@ -32,11 +32,29 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IOurCompilerVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.pure_data"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPure_data([NotNull] OurCompilerParser.Pure_dataContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.data_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitData_type([NotNull] OurCompilerParser.Data_typeContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="OurCompilerParser.program"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitProgram([NotNull] OurCompilerParser.ProgramContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.expression_generator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitExpression_generator([NotNull] OurCompilerParser.Expression_generatorContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="OurCompilerParser.expression"/>.
 	/// </summary>
@@ -55,4 +73,52 @@ public interface IOurCompilerVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitVar_assign_expr([NotNull] OurCompilerParser.Var_assign_exprContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.var_decl_assg_expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitVar_decl_assg_expr([NotNull] OurCompilerParser.Var_decl_assg_exprContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.comp_val"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitComp_val([NotNull] OurCompilerParser.Comp_valContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.comparer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitComparer([NotNull] OurCompilerParser.ComparerContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.logic_link"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLogic_link([NotNull] OurCompilerParser.Logic_linkContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.logic_expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLogic_expr([NotNull] OurCompilerParser.Logic_exprContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.if_expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIf_expr([NotNull] OurCompilerParser.If_exprContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.crement_expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitCrement_expr([NotNull] OurCompilerParser.Crement_exprContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.for_expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFor_expr([NotNull] OurCompilerParser.For_exprContext context);
 }
