@@ -44,11 +44,59 @@ public interface IOurCompilerVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitData_type([NotNull] OurCompilerParser.Data_typeContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.any_math_operator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAny_math_operator([NotNull] OurCompilerParser.Any_math_operatorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.math_expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMath_expr([NotNull] OurCompilerParser.Math_exprContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.comp_val"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitComp_val([NotNull] OurCompilerParser.Comp_valContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.comparer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitComparer([NotNull] OurCompilerParser.ComparerContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.logic_link"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLogic_link([NotNull] OurCompilerParser.Logic_linkContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.logic_expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLogic_expr([NotNull] OurCompilerParser.Logic_exprContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.crement_expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitCrement_expr([NotNull] OurCompilerParser.Crement_exprContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="OurCompilerParser.program"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitProgram([NotNull] OurCompilerParser.ProgramContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.function"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFunction([NotNull] OurCompilerParser.FunctionContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="OurCompilerParser.expression_generator"/>.
 	/// </summary>
@@ -80,45 +128,27 @@ public interface IOurCompilerVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitVar_decl_assg_expr([NotNull] OurCompilerParser.Var_decl_assg_exprContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="OurCompilerParser.comp_val"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitComp_val([NotNull] OurCompilerParser.Comp_valContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="OurCompilerParser.comparer"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitComparer([NotNull] OurCompilerParser.ComparerContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="OurCompilerParser.logic_link"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitLogic_link([NotNull] OurCompilerParser.Logic_linkContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="OurCompilerParser.logic_expr"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitLogic_expr([NotNull] OurCompilerParser.Logic_exprContext context);
-	/// <summary>
 	/// Visit a parse tree produced by <see cref="OurCompilerParser.if_expr"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitIf_expr([NotNull] OurCompilerParser.If_exprContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="OurCompilerParser.crement_expr"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitCrement_expr([NotNull] OurCompilerParser.Crement_exprContext context);
-	/// <summary>
 	/// Visit a parse tree produced by <see cref="OurCompilerParser.for_expr"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitFor_expr([NotNull] OurCompilerParser.For_exprContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.while_expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitWhile_expr([NotNull] OurCompilerParser.While_exprContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.return_expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitReturn_expr([NotNull] OurCompilerParser.Return_exprContext context);
 }

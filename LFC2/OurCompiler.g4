@@ -5,9 +5,41 @@ pure_data:
 	| FLOAT_NUMBER
 	| DOUBLE_NUMBER
 	| STRING_LITERAL;
-data_type: INT | STRING | FLOAT | DOUBLE;
 
-program: expression_generator EOF;
+data_type: CONST? (INT | STRING | FLOAT | DOUBLE);
+
+any_math_operator: PLUS | MINUS | TIMES | DIVIDED | MODULO;
+
+math_expr: (VARIABLE_NAME | pure_data) any_math_operator (
+		VARIABLE_NAME
+		| pure_data
+	) (any_math_operator (VARIABLE_NAME | pure_data))*;
+
+comp_val: VARIABLE_NAME | pure_data;
+
+comparer: LESS | GREAT | EQ | NEQ | LESSOREQ | GREATOREQ;
+
+logic_link: AND | OR;
+
+logic_expr: (comp_val comparer comp_val (logic_link logic_expr)?)
+	| (
+		NOT LPAR comp_val comparer comp_val (
+			logic_link logic_expr
+		)? RPAR
+	);
+
+crement_expr: VARIABLE_NAME (INCREMENT | DECREMENT);
+
+program: (
+		function
+		| (var_declar_expr EOL)
+		| (var_decl_assg_expr EOL)
+	)+ EOF;
+
+function:
+	(data_type | VOID) VARIABLE_NAME LPAR (
+		data_type VARIABLE_NAME (COMMA data_type VARIABLE_NAME)?
+	)? RPAR LGROUP expression_generator RGROUP;
 
 expression_generator: expression*;
 
@@ -16,35 +48,41 @@ expression: (
 		| var_assign_expr
 		| var_decl_assg_expr
 		| crement_expr
+		| return_expr
 	) EOL
-	| (if_expr | for_expr);
+	| (if_expr | for_expr | while_expr);
 
 var_declar_expr: data_type VARIABLE_NAME;
 
-var_assign_expr: VARIABLE_NAME ASGN (pure_data | VARIABLE_NAME);
+var_assign_expr:
+	VARIABLE_NAME ASGN (pure_data | VARIABLE_NAME | math_expr);
 
 var_decl_assg_expr:
-	data_type VARIABLE_NAME ASGN (pure_data | VARIABLE_NAME);
-
-comp_val: VARIABLE_NAME | pure_data;
-comparer: LESS | GREAT | EQ | NEQ | LESSOREQ | GREATOREQ;
-logic_link: AND | OR;
-logic_expr: (comp_val comparer comp_val (logic_link logic_expr)?)
-	| (
-		NOT LPAR comp_val comparer comp_val (
-			logic_link logic_expr
-		)? RPAR
+	data_type VARIABLE_NAME ASGN (
+		pure_data
+		| VARIABLE_NAME
+		| math_expr
 	);
+
 if_expr:
 	IF LPAR logic_expr RPAR (
 		expression
 		| LGROUP expression_generator RGROUP
 	) (ELSE (expression | LGROUP expression_generator RGROUP))?;
 
-crement_expr: VARIABLE_NAME (INCREMENT | DECREMENT);
-
 for_expr:
-	FOR LPAR (var_assign_expr | var_decl_assg_expr) EOL logic_expr EOL crement_expr RPAR;
+	FOR LPAR (var_assign_expr | var_decl_assg_expr) EOL logic_expr EOL (
+		crement_expr
+		| var_assign_expr
+	) RPAR (expression | LGROUP expression_generator RGROUP);
+
+while_expr:
+	WHILE LPAR logic_expr RPAR (
+		expression
+		| LGROUP expression_generator RGROUP
+	);
+
+return_expr: RETURN (pure_data | VARIABLE_NAME | math_expr);
 /*Helpers
  
  */
@@ -60,8 +98,6 @@ BIGCOMMENT: '/*' .*? '*/' -> skip;
 /*Reserved words
  
  */
-fragment NON_VOID_TYPE: INT | STRING | FLOAT | DOUBLE;
-fragment ANY_TYPE: VOID | NON_VOID_TYPE;
 INT: 'int';
 FLOAT: 'float';
 DOUBLE: 'double';
@@ -119,7 +155,7 @@ EOL: ';';
 COMMA: ',';
 WS: [ \t\r\n]+ -> skip;
 VARIABLE_NAME: ANY_LETTER (ANY_DIGIT | ANY_LETTER | '_')*;
-INT_NUMBER: NON_ZERO_DIGIT ANY_DIGIT*;
+INT_NUMBER: (NON_ZERO_DIGIT ANY_DIGIT*) | '0';
 DOUBLE_NUMBER: INT_NUMBER '.' ANY_DIGIT*;
 FLOAT_NUMBER: DOUBLE_NUMBER 'f';
 STRING_LITERAL: '"' .*? '"';
