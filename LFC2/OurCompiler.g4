@@ -10,7 +10,8 @@ data_type: CONST? (INT | STRING | FLOAT | DOUBLE);
 
 any_math_operator: PLUS | MINUS | TIMES | DIVIDED | MODULO;
 
-math_expr: (VARIABLE_NAME | pure_data) any_math_operator (
+math_expr:
+	(VARIABLE_NAME | pure_data) any_math_operator (
 		VARIABLE_NAME
 		| pure_data
 	) (any_math_operator (VARIABLE_NAME | pure_data))*;
