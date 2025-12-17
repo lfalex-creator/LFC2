@@ -39,7 +39,7 @@ program: (
 
 function:
 	(data_type | VOID) VARIABLE_NAME LPAR (
-		data_type VARIABLE_NAME (COMMA data_type VARIABLE_NAME)?
+		data_type VARIABLE_NAME (COMMA data_type VARIABLE_NAME)*
 	)? RPAR LGROUP expression_generator RGROUP;
 
 expression_generator: expression*;
@@ -50,6 +50,7 @@ expression: (
 		| var_decl_assg_expr
 		| crement_expr
 		| return_expr
+		| function_call_expr
 	) EOL
 	| (if_expr | for_expr | while_expr);
 
@@ -84,6 +85,10 @@ while_expr:
 	);
 
 return_expr: RETURN (pure_data | VARIABLE_NAME | math_expr);
+
+function_call_expr:
+	VARIABLE_NAME LPAR (VARIABLE_NAME (COMMA VARIABLE_NAME)*)? RPAR;
+
 /*Helpers
  
  */
