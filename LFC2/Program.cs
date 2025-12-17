@@ -1,5 +1,6 @@
 ﻿using Antlr4.Runtime;
 using Antlr4.Runtime.Misc;
+using System.Numerics;
 
 class Program
 {
@@ -73,6 +74,36 @@ class Program
         }
 
     }
+
+    class FunctionVisitor : OurCompilerBaseVisitor<string>
+    {
+        public override string VisitFunction([NotNull] OurCompilerParser.FunctionContext context)
+        {
+            string functionName = context.GetChild(1).GetText();
+            string paramList = ", {";
+            int fin=context.RPAR().Symbol.TokenIndex-context.GetChild(0).SourceInterval.a+1;
+            int i = context.LPAR().Symbol.TokenIndex-context.GetChild(0).SourceInterval.a+1;
+            for (; i<fin-4;i=i+3)
+                paramList=paramList + context.GetChild(i).GetText() +" "+ context.GetChild(i+1).GetText()+", ";
+
+            if(i!=fin-1)
+                paramList=paramList + context.GetChild(i).GetText() +" "+ context.GetChild(i+1).GetText();
+            paramList=paramList+"}";
+            return "<" + functionName + (functionName.Equals("main")?", main":", non-main") + paramList +">\n";
+        }
+        public override string VisitProgram([NotNull] OurCompilerParser.ProgramContext context)
+        {
+            string result = "";
+            for (int i = 0; i < context.ChildCount; i++)
+            {
+                if(context.GetChild(i) is OurCompilerParser.FunctionContext)
+                {
+                    result += VisitFunction((OurCompilerParser.FunctionContext)context.GetChild(i));
+                }
+            }
+            return result;
+        }
+    }
     private static OurCompilerLexer SetupLexer(string text)
     {
         AntlrInputStream inputStream = new AntlrInputStream(text);
@@ -104,44 +135,14 @@ class Program
         //File.WriteAllText("../../../tokens.txt", "");
     }
 
-    private static void PrintFunctions(OurCompilerLexer lexer)
+    private static void PrintFunctions(OurCompilerParser parser)
     {
-        IEnumerable<IToken> tokens = lexer.GetAllTokens();
-        lexer.Reset();
+        var programContext = parser.program();
+        FunctionVisitor functionVisitor = new FunctionVisitor();
+        string functions = functionVisitor.Visit(programContext);
+        parser.Reset();
+        File.WriteAllText("../../../funcs.txt", "Functions:\n"+functions+"\n");
 
-        File.WriteAllText("../../../funcs.txt", "Functions:\n\n");
-
-        for (int i = 1; i<tokens.Count()-1; i++)
-            if (lexer.Vocabulary.GetSymbolicName(tokens.ElementAt(i).Type)=="VARIABLE_NAME" && lexer.Vocabulary.GetSymbolicName(tokens.ElementAt(i+1).Type)=="LPAR")
-            {
-               int dataTypeMaybe = tokens.ElementAt(i-1).Type;
-               if ((dataTypeMaybe>=3 && dataTypeMaybe<=6) || dataTypeMaybe==8)
-                {
-                    File.AppendAllText("../../../funcs.txt", $"<" + $"{tokens.ElementAt(i).Text}, " + (tokens.ElementAt(i).Text=="main" ? "main" : "non-main"));
-
-                    File.AppendAllText("../../../funcs.txt", ", {");
-                    if(lexer.Vocabulary.GetSymbolicName(tokens.ElementAt(i+2).Type)!="RPAR")
-                    for (int j = i+2;true; j=j+3)
-                    {
-                        
-                        if (j+2<tokens.Count()-1)
-                        {
-                            File.AppendAllText("../../../funcs.txt", $"{tokens.ElementAt(j).Text} {tokens.ElementAt(j+1).Text}, ");
-                            if (lexer.Vocabulary.GetSymbolicName(tokens.ElementAt(j+5).Type)=="RPAR")
-                            {
-                                File.AppendAllText("../../../funcs.txt", $"{tokens.ElementAt(j+3).Text} {tokens.ElementAt(j+4).Text}");
-                                break;
-                            }
-                        }
-                        else
-                            break;
-                    }
-                    File.AppendAllText("../../../funcs.txt", "}");
-
-                    File.AppendAllText("../../../funcs.txt", ">\n");
-                }
-
-            }
     }
 
     private static void PrintGlobalVar(OurCompilerParser parser)
@@ -161,11 +162,11 @@ class Program
 
     OurCompilerLexer lexer = SetupLexer(input);
     PrintTokens(lexer);
-    PrintFunctions(lexer);
 
 
     OurCompilerParser parser = SetupParser(lexer);
     //Console.Write(parser.program().ToStringTree());
     PrintGlobalVar(parser);
-}
+    PrintFunctions(parser);
+    }
 }

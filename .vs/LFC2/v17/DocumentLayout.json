@@ -5,6 +5,18 @@
     {
       "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\lupuf\\git-projects\\lfc2\\lfc2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\lupuf\\git-projects\\lfc2\\lfc2\\funcs.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\funcs.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\lupuf\\git-projects\\lfc2\\lfc2\\globalvar.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\globalvar.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\lupuf\\git-projects\\lfc2\\lfc2\\input.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\input.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 294,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,13 +38,52 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "globalVar.txt",
+              "DocumentMoniker": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\globalVar.txt",
+              "RelativeDocumentMoniker": "LFC2\\globalVar.txt",
+              "ToolTip": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\globalVar.txt",
+              "RelativeToolTip": "LFC2\\globalVar.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-12-17T14:57:11.935Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "input.txt",
+              "DocumentMoniker": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\input.txt",
+              "RelativeDocumentMoniker": "LFC2\\input.txt",
+              "ToolTip": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\input.txt",
+              "RelativeToolTip": "LFC2\\input.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-12-17T14:32:47.114Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "funcs.txt",
+              "DocumentMoniker": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\funcs.txt",
+              "RelativeDocumentMoniker": "LFC2\\funcs.txt",
+              "ToolTip": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\funcs.txt",
+              "RelativeToolTip": "LFC2\\funcs.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-12-17T14:19:02.015Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\Program.cs",
               "RelativeDocumentMoniker": "LFC2\\Program.cs",
               "ToolTip": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\Program.cs",
               "RelativeToolTip": "LFC2\\Program.cs",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAQwAYAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAE8AAAAAAAAAAAA3wFkAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-06T11:05:03.549Z",
               "EditorCaption": ""
