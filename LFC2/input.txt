@@ -1,9 +1,11 @@
 double y;
+int z = 10;
 int suma(int a,int b)
 {
 	return a+b;
 }
-int x=2;
+int x=z;
+int a = z+x/2;
 int main()
 {
 	int s=0;
@@ -12,3 +14,4 @@ int main()
 	s=s*2;
 	return 0;
 }
+string b = "hello";

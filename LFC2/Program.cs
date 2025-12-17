@@ -1,7 +1,78 @@
 ﻿using Antlr4.Runtime;
+using Antlr4.Runtime.Misc;
 
 class Program
 {
+
+    class GlobalVarVisitor : OurCompilerBaseVisitor<string>
+    {
+        public override string VisitPure_data([NotNull] OurCompilerParser.Pure_dataContext context)
+        {
+            if (context == null)
+                return "";
+            return context.GetChild(0).GetText();
+        }
+        public override string VisitProgram([NotNull] OurCompilerParser.ProgramContext context)
+        {
+            string result = "";
+            for(int i = 0; i < context.var_declar_expr().Length; i++)
+            {
+                result += VisitVar_declar_expr(context.var_declar_expr(i));
+
+            }
+            for (int i = 0; i < context.var_decl_assg_expr().Length; i++)
+            {
+                result += VisitVar_decl_assg_expr(context.var_decl_assg_expr(i));
+
+            }
+            
+
+            return result;
+        }
+        public override string VisitVar_declar_expr([NotNull] OurCompilerParser.Var_declar_exprContext context)
+        {
+            string type = Visit(context.data_type());
+            string val = context.VARIABLE_NAME().GetText();
+
+            return "<" + type + ", " + val + ">\n";
+        }
+
+        public override string VisitData_type([NotNull] OurCompilerParser.Data_typeContext context)
+        {
+            return context.GetText();
+        }
+
+        public override string VisitVar_decl_assg_expr([NotNull] OurCompilerParser.Var_decl_assg_exprContext context)
+        {
+            string type = Visit(context.data_type());
+            string variable1 = context.VARIABLE_NAME(0).GetText();
+            string pureValue = VisitPure_data(context.pure_data());
+            string variable2 = "";
+            if (context.VARIABLE_NAME().Length > 1)
+            {
+                variable2 = context.VARIABLE_NAME(1).GetText();
+            }
+            string expr = "";
+            if (pureValue == "" && variable2 == "")
+            {
+                expr = VisitMath_expr(context.math_expr());
+            }
+            string value = pureValue != "" ? pureValue : (variable2 != "" ? variable2 : expr);
+            return "<" + type + ", " + variable1 + ", " + value + ">\n";
+        }
+
+        public override string VisitMath_expr([NotNull] OurCompilerParser.Math_exprContext context)
+        {
+            string res = context.GetText();
+            return res;
+        }
+
+        public override string VisitAny_math_operator([NotNull] OurCompilerParser.Any_math_operatorContext context)
+        {
+            return context.GetChild(0).GetText();
+        }
+
+    }
     private static OurCompilerLexer SetupLexer(string text)
     {
         AntlrInputStream inputStream = new AntlrInputStream(text);
@@ -73,6 +144,17 @@ class Program
             }
     }
 
+    private static void PrintGlobalVar(OurCompilerParser parser)
+    {
+        var programContext = parser.program();
+
+        GlobalVarVisitor visitor = new GlobalVarVisitor();
+        string result =  visitor.Visit(programContext);
+        parser.Reset();
+
+        File.WriteAllText("../../../globalVar.txt", result);
+
+    }
     static void Main()
 {
     string input = File.ReadAllText("../../../input.txt");
@@ -81,7 +163,9 @@ class Program
     PrintTokens(lexer);
     PrintFunctions(lexer);
 
+
     OurCompilerParser parser = SetupParser(lexer);
-    parser.program();
+    //Console.Write(parser.program().ToStringTree());
+    PrintGlobalVar(parser);
 }
 }

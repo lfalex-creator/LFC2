@@ -16,3 +16,21 @@ C:\Users\lupuf\Git-projects\LFC2\LFC2\obj\Debug\net8.0\LFC2.csproj.AssemblyRefer
 C:\Users\lupuf\Git-projects\LFC2\LFC2\bin\Debug\net8.0\Antlr4.Runtime.Standard.dll
 C:\Users\lupuf\Git-projects\LFC2\LFC2\obj\Debug\net8.0\LFC2.csproj.Up2Date
 C:\Users\lupuf\Git-projects\LFC2\LFC2\obj\Debug\net8.0\LFC2.sourcelink.json
+C:\Users\gheor\Desktop\Facultate\Anul II\LFC\LFC2\LFC2\bin\Debug\net8.0\LFC2.exe
+C:\Users\gheor\Desktop\Facultate\Anul II\LFC\LFC2\LFC2\bin\Debug\net8.0\LFC2.deps.json
+C:\Users\gheor\Desktop\Facultate\Anul II\LFC\LFC2\LFC2\bin\Debug\net8.0\LFC2.runtimeconfig.json
+C:\Users\gheor\Desktop\Facultate\Anul II\LFC\LFC2\LFC2\bin\Debug\net8.0\LFC2.dll
+C:\Users\gheor\Desktop\Facultate\Anul II\LFC\LFC2\LFC2\bin\Debug\net8.0\LFC2.pdb
+C:\Users\gheor\Desktop\Facultate\Anul II\LFC\LFC2\LFC2\bin\Debug\net8.0\Antlr4.Runtime.Standard.dll
+C:\Users\gheor\Desktop\Facultate\Anul II\LFC\LFC2\LFC2\obj\Debug\net8.0\LFC2.csproj.AssemblyReference.cache
+C:\Users\gheor\Desktop\Facultate\Anul II\LFC\LFC2\LFC2\obj\Debug\net8.0\LFC2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gheor\Desktop\Facultate\Anul II\LFC\LFC2\LFC2\obj\Debug\net8.0\LFC2.AssemblyInfoInputs.cache
+C:\Users\gheor\Desktop\Facultate\Anul II\LFC\LFC2\LFC2\obj\Debug\net8.0\LFC2.AssemblyInfo.cs
+C:\Users\gheor\Desktop\Facultate\Anul II\LFC\LFC2\LFC2\obj\Debug\net8.0\LFC2.csproj.CoreCompileInputs.cache
+C:\Users\gheor\Desktop\Facultate\Anul II\LFC\LFC2\LFC2\obj\Debug\net8.0\LFC2.sourcelink.json
+C:\Users\gheor\Desktop\Facultate\Anul II\LFC\LFC2\LFC2\obj\Debug\net8.0\LFC2.csproj.Up2Date
+C:\Users\gheor\Desktop\Facultate\Anul II\LFC\LFC2\LFC2\obj\Debug\net8.0\LFC2.dll
+C:\Users\gheor\Desktop\Facultate\Anul II\LFC\LFC2\LFC2\obj\Debug\net8.0\refint\LFC2.dll
+C:\Users\gheor\Desktop\Facultate\Anul II\LFC\LFC2\LFC2\obj\Debug\net8.0\LFC2.pdb
+C:\Users\gheor\Desktop\Facultate\Anul II\LFC\LFC2\LFC2\obj\Debug\net8.0\LFC2.genruntimeconfig.cache
+C:\Users\gheor\Desktop\Facultate\Anul II\LFC\LFC2\LFC2\obj\Debug\net8.0\ref\LFC2.dll
