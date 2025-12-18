@@ -1,4 +1,5 @@
 double y;
+inta c;
 int z = 10;
 int suma(int a,int b)
 {

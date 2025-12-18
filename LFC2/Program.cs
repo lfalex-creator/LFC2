@@ -1,6 +1,8 @@
 ﻿using Antlr4.Runtime;
 using Antlr4.Runtime.Misc;
 using System.Numerics;
+using System.Text;
+using System.Text.RegularExpressions;
 
 class Program
 {
@@ -104,6 +106,72 @@ class Program
             return result;
         }
     }
+
+    class ErrorVisitor : OurCompilerBaseVisitor<string>
+    {
+        private readonly StringBuilder _sb = new StringBuilder();
+
+        public override string VisitProgram([NotNull] OurCompilerParser.ProgramContext context)
+        {
+            //for (int i = 0; i < context.function().Length; i++)
+            //{
+            //    VisitFunction(context.function(i));
+            //}
+            for (int i = 0; i < context.var_declar_expr().Length; i++)
+            {
+                VisitVar_declar_expr(context.var_declar_expr(i));
+            }
+            return _sb.ToString();
+        }
+
+        public override string VisitVar_declar_expr([NotNull] OurCompilerParser.Var_declar_exprContext context)
+        {
+            Regex typeDef = new Regex("^((const )?int|float|double|string)$|^void$");
+            string type = context.GetChild(0).GetText();
+            if (!typeDef.IsMatch(type))
+            {
+                int line = context.Start?.Line ?? 0;
+                string message = $"Error: unknown type '{type}' at line {line}";
+                _sb.AppendLine(message);
+                return message + "\n";
+            }
+            return "";
+        }
+
+        public override string VisitFunction([NotNull] OurCompilerParser.FunctionContext context)
+        {
+            Regex typeDef = new Regex("^((const )?int|float|double|string)$|^void$");
+            string type = context.GetChild(0).GetText();
+            if (!typeDef.IsMatch(type))
+            {
+                int line = context.Start?.Line ?? 0;
+                string message = $"Error: unknown type '{type}' at line {line}";
+                _sb.AppendLine(message);
+                return message + "\n";
+            }
+            return "";
+        }
+    }
+    class FileErrorListener : BaseErrorListener
+    {
+        private readonly string _path;
+        public FileErrorListener(string path) { _path = path; }
+
+        public override void SyntaxError(TextWriter output, IRecognizer recognizer, IToken offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e)
+        {
+            File.AppendAllText(_path, $"line {line}:{charPositionInLine} {msg}\n");
+        }
+    }
+    class FileLexerErrorListener : IAntlrErrorListener<int>
+    {
+        private readonly string _path;
+        public FileLexerErrorListener(string path) { _path = path; }
+
+        public void SyntaxError(TextWriter output, IRecognizer recognizer, int offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e)
+        {
+            File.AppendAllText(_path, $"line {line}:{charPositionInLine} {msg}\n");
+        }
+    }
     private static OurCompilerLexer SetupLexer(string text)
     {
         AntlrInputStream inputStream = new AntlrInputStream(text);
@@ -156,17 +224,35 @@ class Program
         File.WriteAllText("../../../globalVar.txt", result);
 
     }
+
+    private static void PrintErrors(OurCompilerParser parser)
+    {
+        var programContext = parser.program();
+
+        ErrorVisitor visitor = new ErrorVisitor();
+        string result = visitor.Visit(programContext);
+        parser.Reset();
+
+        File.WriteAllText("../../../errors.txt", result);
+    }
     static void Main()
 {
     string input = File.ReadAllText("../../../input.txt");
 
-    OurCompilerLexer lexer = SetupLexer(input);
-    PrintTokens(lexer);
+    File.WriteAllText("../../../errors.txt", "");
+
+        OurCompilerLexer lexer = SetupLexer(input);
+        lexer.RemoveErrorListeners();
+        lexer.AddErrorListener(new FileLexerErrorListener("../../../errors.txt"));
+        PrintTokens(lexer);
 
 
     OurCompilerParser parser = SetupParser(lexer);
-    //Console.Write(parser.program().ToStringTree());
-    PrintGlobalVar(parser);
+
+        parser.RemoveErrorListeners();
+        parser.AddErrorListener(new FileErrorListener("../../../errors.txt"));
+        PrintErrors(parser);
+        PrintGlobalVar(parser);
     PrintFunctions(parser);
     }
 }

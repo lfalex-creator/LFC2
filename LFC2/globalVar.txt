@@ -1,4 +1,5 @@
 <double, y>
+<int, f>
 <int, z, 10>
 <int, x, z>
 <int, a, z+x/2>

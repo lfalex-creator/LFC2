@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from c:/Users/lupuf/Git-projects/LFC2/LFC2/OurCompiler.g4 by ANTLR 4.13.1
+// Generated from c:/Users/gheor/Desktop/Facultate/Anul II/LFC/LFC2/LFC2/OurCompiler.g4 by ANTLR 4.13.1
 
 // Unreachable code detected
 #pragma warning disable 0162
