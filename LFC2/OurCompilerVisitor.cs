@@ -151,4 +151,10 @@ public interface IOurCompilerVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitReturn_expr([NotNull] OurCompilerParser.Return_exprContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.function_call_expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFunction_call_expr([NotNull] OurCompilerParser.Function_call_exprContext context);
 }

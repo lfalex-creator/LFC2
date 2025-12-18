@@ -1,4 +1,22 @@
 Functions:
-<suma, non-main, {int a, int b}>
-<main, main, {}>
+<
+Nume: suma
+Tip: non-main, recursiva
+Tip returnat: int
+Parametri: {int a, int b}
+Strucuturi repetitive: none
+Structuri decizionale: none
+Variabile locale: none
+>
+
+<
+Nume: main
+Tip: main, iterativa
+Tip returnat: int
+Parametri: {}
+Strucuturi repetitive: <for,15>, <while,17>
+Structuri decizionale: <if-else,20>
+Variabile locale: (s, 0), (xoy, 1), (test, ), (i, 1)
+>
+
 

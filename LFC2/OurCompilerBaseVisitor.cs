@@ -234,4 +234,14 @@ public partial class OurCompilerBaseVisitor<Result> : AbstractParseTreeVisitor<R
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	public virtual Result VisitReturn_expr([NotNull] OurCompilerParser.Return_exprContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OurCompilerParser.function_call_expr"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitFunction_call_expr([NotNull] OurCompilerParser.Function_call_exprContext context) { return VisitChildren(context); }
 }

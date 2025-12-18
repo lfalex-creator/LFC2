@@ -3,6 +3,7 @@ inta c;
 int z = 10;
 int suma(int a,int b)
 {
+	suma(a,b);
 	return a+b;
 }
 int x=z;
@@ -10,8 +11,17 @@ int a = z+x/2;
 int main()
 {
 	int s=0;
+	int xoy=1;
+	int test;
 	for(int i=1;i<=5;i++)
 		s=s+i;
+	while(xoy!=1024)
+		xoy=xoy*2;
+
+	if(xoy==s)
+		s=xoy;
+	else
+		xoy=s;
 	s=s*2;
 	return 0;
 }

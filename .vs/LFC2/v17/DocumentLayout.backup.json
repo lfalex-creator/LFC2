@@ -1,42 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\",
+  "WorkspaceRootPath": "C:\\Users\\lupuf\\Git-projects\\LFC2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\gheor\\desktop\\facultate\\anul ii\\lfc\\lfc2\\lfc2\\input.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\input.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\gheor\\desktop\\facultate\\anul ii\\lfc\\lfc2\\lfc2\\funcs.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\lupuf\\git-projects\\lfc2\\lfc2\\funcs.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\funcs.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\gheor\\desktop\\facultate\\anul ii\\lfc\\lfc2\\lfc2\\globalvar.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\globalvar.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\lupuf\\git-projects\\lfc2\\lfc2\\input.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\input.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\gheor\\desktop\\facultate\\anul ii\\lfc\\lfc2\\lfc2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\lupuf\\git-projects\\lfc2\\lfc2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\gheor\\desktop\\facultate\\anul ii\\lfc\\lfc2\\lfc2\\ourcompilerlexer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\ourcompilerlexer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\gheor\\desktop\\facultate\\anul ii\\lfc\\lfc2\\lfc2\\ourcompilervisitor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\ourcompilervisitor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\gheor\\desktop\\facultate\\anul ii\\lfc\\lfc2\\lfc2\\errors.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\errors.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\gheor\\desktop\\facultate\\anul ii\\lfc\\lfc2\\lfc2\\tokens.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\tokens.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\gheor\\desktop\\facultate\\anul ii\\lfc\\lfc2\\lfc2\\ourcompilerparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\ourcompilerparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\lupuf\\git-projects\\lfc2\\lfc2\\globalvar.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\globalvar.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,8 +26,21 @@
       "DocumentGroups": [
         {
           "DockedHeight": 294,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "input.txt",
+              "DocumentMoniker": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\input.txt",
+              "RelativeDocumentMoniker": "LFC2\\input.txt",
+              "ToolTip": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\input.txt",
+              "RelativeToolTip": "LFC2\\input.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-12-17T14:32:47.114Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -58,119 +51,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "tokens.txt",
-              "DocumentMoniker": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\tokens.txt",
-              "RelativeDocumentMoniker": "LFC2\\tokens.txt",
-              "ToolTip": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\tokens.txt",
-              "RelativeToolTip": "LFC2\\tokens.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2025-12-17T19:09:38.865Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "errors.txt",
-              "DocumentMoniker": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\errors.txt",
-              "RelativeDocumentMoniker": "LFC2\\errors.txt",
-              "ToolTip": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\errors.txt",
-              "RelativeToolTip": "LFC2\\errors.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2025-12-17T18:14:53.042Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "OurCompilerLexer.cs",
-              "DocumentMoniker": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\OurCompilerLexer.cs",
-              "RelativeDocumentMoniker": "LFC2\\OurCompilerLexer.cs",
-              "ToolTip": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\OurCompilerLexer.cs",
-              "RelativeToolTip": "LFC2\\OurCompilerLexer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD8AAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-17T18:09:33.614Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "OurCompilerVisitor.cs",
-              "DocumentMoniker": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\OurCompilerVisitor.cs",
-              "RelativeDocumentMoniker": "LFC2\\OurCompilerVisitor.cs",
-              "ToolTip": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\OurCompilerVisitor.cs",
-              "RelativeToolTip": "LFC2\\OurCompilerVisitor.cs",
-              "ViewState": "AgIAAF8AAAAAAAAAAAAUwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-17T18:06:10.405Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "OurCompilerParser.cs",
-              "DocumentMoniker": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\OurCompilerParser.cs",
-              "RelativeDocumentMoniker": "LFC2\\OurCompilerParser.cs",
-              "ToolTip": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\OurCompilerParser.cs",
-              "RelativeToolTip": "LFC2\\OurCompilerParser.cs",
-              "ViewState": "AgIAABUDAAAAAAAAAAAjwCoDAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-17T18:06:02.141Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "globalVar.txt",
-              "DocumentMoniker": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\globalVar.txt",
+              "DocumentMoniker": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\globalVar.txt",
               "RelativeDocumentMoniker": "LFC2\\globalVar.txt",
-              "ToolTip": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\globalVar.txt",
+              "ToolTip": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\globalVar.txt",
               "RelativeToolTip": "LFC2\\globalVar.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
               "WhenOpened": "2025-12-17T14:57:11.935Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\Program.cs",
-              "RelativeDocumentMoniker": "LFC2\\Program.cs",
-              "ToolTip": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\Program.cs",
-              "RelativeToolTip": "LFC2\\Program.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAWwCwAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-06T11:05:03.549Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "input.txt",
-              "DocumentMoniker": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\input.txt",
-              "RelativeDocumentMoniker": "LFC2\\input.txt",
-              "ToolTip": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\input.txt*",
-              "RelativeToolTip": "LFC2\\input.txt*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2025-12-17T14:32:47.114Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "funcs.txt",
-              "DocumentMoniker": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\funcs.txt",
+              "DocumentMoniker": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\funcs.txt",
               "RelativeDocumentMoniker": "LFC2\\funcs.txt",
-              "ToolTip": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\funcs.txt",
+              "ToolTip": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\funcs.txt",
               "RelativeToolTip": "LFC2\\funcs.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
               "WhenOpened": "2025-12-17T14:19:02.015Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\Program.cs",
+              "RelativeDocumentMoniker": "LFC2\\Program.cs",
+              "ToolTip": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\Program.cs",
+              "RelativeToolTip": "LFC2\\Program.cs",
+              "ViewState": "AgIAAI4AAAAAAAAAAAAuwLEAAABpAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T11:05:03.549Z",
               "EditorCaption": ""
             }
           ]
