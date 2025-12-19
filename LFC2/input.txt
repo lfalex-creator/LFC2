@@ -1,18 +1,24 @@
 double y;
-inta c;
+int c;
 int z = 10;
-int suma(int a,int b)
+/*comment*/
+//comment
+void suma(int a,int b)
 {
+	int a;
 	suma(a,b);
-	return a+b;
 }
-int x=z;
-int a = z+x/2;
+int x = z;
+string p;
+int a = z+p/2;
+int val = z+x/3;
 int main()
 {
+	int c;
+	float f=0.0;
 	int s=0;
 	int xoy=1;
-	int test;
+	int test = 5;
 	for(int i=1;i<=5;i++)
 		s=s+i;
 	while(xoy!=1024)
@@ -23,6 +29,24 @@ int main()
 	else
 		xoy=s;
 	s=s*2;
+	diferenta(s,z);
+	suma(s,z);
+	suma(s,c);
+	suma(s,y);
+	suma(f,f);
+	suma(s,xoy, test);
+	return 0;
+}
+
+
+float suma(float a, float b)
+{
+	int c = 0;
+	return a+b;
+}
+
+int main()
+{
 	return 0;
 }
 string b = "hello";

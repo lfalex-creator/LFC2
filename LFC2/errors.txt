@@ -1,2 +1,6 @@
-line 2:0 extraneous input 'inta' expecting {<EOF>, 'int', 'float', 'double', 'string', 'const', 'void'}
-line 2:0 extraneous input 'inta' expecting {<EOF>, 'int', 'float', 'double', 'string', 'const', 'void'}
+Error: type mismatch for variable 'a' at line 13
+Error: duplicated 'main' function defined at line 48
+Error: duplicated variable 'a' at line 8
+Error: undeclared function 'diferenta' at line 32
+Error: function 'suma' called with incorrect argument types at line 35
+Error: function 'suma' called with incorrect number of arguments at line 37

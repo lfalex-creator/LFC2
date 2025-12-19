@@ -1,6 +1,8 @@
 <double, y>
-<int, f>
+<int, c>
+<string, p>
 <int, z, 10>
 <int, x, z>
-<int, a, z+x/2>
+<int, a, z+p/2>
+<int, val, z+x/3>
 <string, b, "hello">

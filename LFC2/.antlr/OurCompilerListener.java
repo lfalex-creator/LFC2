@@ -206,4 +206,14 @@ public interface OurCompilerListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitReturn_expr(OurCompilerParser.Return_exprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link OurCompilerParser#function_call_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction_call_expr(OurCompilerParser.Function_call_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link OurCompilerParser#function_call_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction_call_expr(OurCompilerParser.Function_call_exprContext ctx);
 }

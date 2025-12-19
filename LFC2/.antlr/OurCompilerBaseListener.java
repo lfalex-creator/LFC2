@@ -251,6 +251,18 @@ public class OurCompilerBaseListener implements OurCompilerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitReturn_expr(OurCompilerParser.Return_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunction_call_expr(OurCompilerParser.Function_call_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunction_call_expr(OurCompilerParser.Function_call_exprContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

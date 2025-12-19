@@ -87,7 +87,11 @@ while_expr:
 return_expr: RETURN (pure_data | VARIABLE_NAME | math_expr);
 
 function_call_expr:
-	VARIABLE_NAME LPAR (VARIABLE_NAME (COMMA VARIABLE_NAME)*)? RPAR;
+	VARIABLE_NAME LPAR (
+		(VARIABLE_NAME | pure_data) (
+			COMMA (VARIABLE_NAME | pure_data)
+		)*
+	)? RPAR;
 
 /*Helpers
  
