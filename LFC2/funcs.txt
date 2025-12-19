@@ -6,7 +6,7 @@ Tip returnat: void
 Parametri: {int a, int b}
 Strucuturi repetitive: none
 Structuri decizionale: none
-Variabile locale: (a, )
+Variabile locale: (int, a, )
 >
 
 <
@@ -16,7 +16,7 @@ Tip returnat: int
 Parametri: {}
 Strucuturi repetitive: <for,22>, <while,24>
 Structuri decizionale: <if-else,27>
-Variabile locale: (c, ), (f, 0.0), (s, 0), (xoy, 1), (test, 5), (i, 1)
+Variabile locale: (int, c, ), (float, f, 0.0), (int, s, 0), (int, xoy, 1), (int, test, 5), (int, i, 1)
 >
 
 <
@@ -26,7 +26,7 @@ Tip returnat: float
 Parametri: {float a, float b}
 Strucuturi repetitive: none
 Structuri decizionale: none
-Variabile locale: (c, 0)
+Variabile locale: (int, c, 0)
 >
 
 <

@@ -84,7 +84,7 @@ class Program
         bool isRecursive = false;
         ArrayList<string> structures = new ArrayList<string>();
         ArrayList<string> ifs = new ArrayList<string>();
-        ArrayList<Pair<string, string>> localVariables = new ArrayList<Pair<string, string>>();
+        ArrayList<Tuple<string, string,string>> localVariables = new ArrayList<Tuple<string, string,string>>();
         string currentFunctionName = "";
         public override string VisitFunction([NotNull] OurCompilerParser.FunctionContext context)
         {
@@ -173,13 +173,13 @@ class Program
         public override string VisitVar_declar_expr([NotNull] OurCompilerParser.Var_declar_exprContext context)
         {
             string aux;
-            localVariables.Add(new Pair<string, string>(context.VARIABLE_NAME().GetText(), ""));
+            localVariables.Add(new Tuple<string,string, string>(context.data_type().GetText(),context.VARIABLE_NAME().GetText(), ""));
             return base.VisitVar_declar_expr(context);
         }
         public override string VisitVar_decl_assg_expr([NotNull] OurCompilerParser.Var_decl_assg_exprContext context)
         {
             string aux;
-            localVariables.Add(new Pair<string, string>(context.GetChild(1).GetText(), context.GetChild(3).GetText()));
+            localVariables.Add(new Tuple<string,string, string>(context.data_type().GetText(), context.GetChild(1).GetText(), context.GetChild(3).GetText()));
             return base.VisitVar_decl_assg_expr(context);
         }
         public override string VisitProgram([NotNull] OurCompilerParser.ProgramContext context)
