@@ -30,8 +30,9 @@ int main()
 		xoy=s;
 	s=s*2;
 	diferenta(s,z);
-	suma(s,z);
-	suma(s,c);
+	int sum = suma(s,f);
+	suma(3.5,z);
+	suma(4,c);
 	suma(s,y);
 	suma(f,f);
 	suma(s,xoy, test);

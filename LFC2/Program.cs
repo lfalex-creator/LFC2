@@ -400,6 +400,17 @@ class Program
                         }
                     }
                 }
+                if(context.function_call_expr() != null)
+                {
+                    string calledFuncName = context.function_call_expr().VARIABLE_NAME(0).GetText();
+                    if (!_functionNames.Contains(calledFuncName))
+                    {
+                        int line = context.Start.Line;
+                        string message = $"Error: undeclared function '{calledFuncName}' at line {line}";
+                        _sb.AppendLine(message);
+                        return false;
+                    }
+                }
                 _globalVariables.Add(varName, type);
             }
             else if (context.Parent.Parent.Parent is OurCompilerParser.FunctionContext func)
@@ -508,6 +519,7 @@ class Program
                 }
 
             }
+
 
             return "";
         }
