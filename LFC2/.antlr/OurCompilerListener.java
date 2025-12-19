@@ -1,4 +1,4 @@
-// Generated from c:/Users/gheor/Desktop/Facultate/Anul II/LFC/LFC2/LFC2/OurCompiler.g4 by ANTLR 4.13.1
+// Generated from c:/Users/lupuf/Git-projects/LFC2/LFC2/OurCompiler.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**

@@ -17,10 +17,15 @@ int main()
 	int c;
 	float f=0.0;
 	int s=0;
+	int d="ana";
 	int xoy=1;
 	int test = 5;
+	int ana2;
+	ana2="t";
 	for(int i=1;i<=5;i++)
-		s=s+i;
+	{
+		suma("xx","yy");
+	}
 	while(xoy!=1024)
 		xoy=xoy*2;
 

@@ -14,9 +14,9 @@ Nume: main
 Tip: main, iterativa
 Tip returnat: int
 Parametri: {}
-Strucuturi repetitive: <for,22>, <while,24>
-Structuri decizionale: <if-else,27>
-Variabile locale: (int, c, ), (float, f, 0.0), (int, s, 0), (int, xoy, 1), (int, test, 5), (int, i, 1)
+Strucuturi repetitive: <for,25>, <while,29>
+Structuri decizionale: <if-else,32>
+Variabile locale: (int, c, ), (float, f, 0.0), (int, s, 0), (int, d, "ana"), (int, xoy, 1), (int, test, 5), (int, ana2, ), (int, i, 1)
 >
 
 <
