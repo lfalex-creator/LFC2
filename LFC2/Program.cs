@@ -84,7 +84,7 @@ class Program
         bool isRecursive = false;
         ArrayList<string> structures = new ArrayList<string>();
         ArrayList<string> ifs = new ArrayList<string>();
-        ArrayList<Pair<string, string>> localVariables = new ArrayList<Pair<string, string>>();
+        ArrayList<Tuple<string, string,string>> localVariables = new ArrayList<Tuple<string, string,string>>();
         string currentFunctionName = "";
         public override string VisitFunction([NotNull] OurCompilerParser.FunctionContext context)
         {
@@ -173,13 +173,13 @@ class Program
         public override string VisitVar_declar_expr([NotNull] OurCompilerParser.Var_declar_exprContext context)
         {
             string aux;
-            localVariables.Add(new Pair<string, string>(context.VARIABLE_NAME().GetText(), ""));
+            localVariables.Add(new Tuple<string,string, string>(context.data_type().GetText(),context.VARIABLE_NAME().GetText(), ""));
             return base.VisitVar_declar_expr(context);
         }
         public override string VisitVar_decl_assg_expr([NotNull] OurCompilerParser.Var_decl_assg_exprContext context)
         {
             string aux;
-            localVariables.Add(new Pair<string, string>(context.GetChild(1).GetText(), context.GetChild(3).GetText()));
+            localVariables.Add(new Tuple<string,string, string>(context.data_type().GetText(), context.GetChild(1).GetText(), context.GetChild(3).GetText()));
             return base.VisitVar_decl_assg_expr(context);
         }
         public override string VisitProgram([NotNull] OurCompilerParser.ProgramContext context)
@@ -335,6 +335,22 @@ class Program
                     return true;
                 }
                 _functions[funcName].Add(varName, type);
+            }
+            return false;
+        }
+        private bool IsVariableDeclared(string varName, OurCompilerParser.Var_assign_exprContext context)
+        {
+            if (context.Parent is OurCompilerParser.ProgramContext)
+            {
+                if (_globalVariables.ContainsKey(varName))
+                    return true;
+            }
+            else if (context.Parent.Parent.Parent is OurCompilerParser.FunctionContext func)
+            {
+                string funcName = func.VARIABLE_NAME(0).GetText();
+                funcName = functionNameConstructor(funcName, func);
+                if (_functions[funcName].ContainsKey(varName))
+                    return true;
             }
             return false;
         }
@@ -524,6 +540,50 @@ class Program
             return "";
         }
 
+        public override string VisitVar_assign_expr([NotNull] OurCompilerParser.Var_assign_exprContext context)
+        {
+            string varName = context.VARIABLE_NAME(0).GetText();
+
+            if (context.pure_data()!= null)
+            {
+                dynamic value = EvaluatePureData(context.pure_data());
+                if (!IsVariableDeclared(varName, context))
+                {
+                    string message = $"Error: undeclared variable '{varName}' at line {context.Start.Line}";
+                    _sb.AppendLine(message);
+                    return message + "\n";
+                }
+                if(context.Parent is OurCompilerParser.ProgramContext)
+                {
+                    if (!IsTypeCompatible(_globalVariables[varName],value))
+                    {
+                        string message = $"Error: mismatched types at assignment to variable '{varName}' at line {context.Start.Line}";
+                        _sb.AppendLine(message);
+                        return message + "\n";
+                    }
+                }
+                else
+                {
+                    var func= context.Parent.Parent.Parent as OurCompilerParser.FunctionContext;
+                    var funcName = functionNameConstructor(func.VARIABLE_NAME(0).GetText(), func);
+                    if (!IsTypeCompatible(_functions[funcName][varName],value))
+                    {
+                        string message = $"Error: mismatched types at assignment to variable '{varName}' at line {context.Start.Line}";
+                        _sb.AppendLine(message);
+                        return message + "\n";
+                    }
+                }
+            }
+
+            /*if (!IsTypeCompatible(type, value))
+            {
+                int line = context.Start.Line;
+                string message = $"Error: type mismatch for variable '{varName}' at line {line}";
+                _sb.AppendLine(message);
+                return message + "\n";
+            }*/
+            return "";
+        }
         private bool IsTypeCompatible(string type, dynamic value)
         {
             if (value == null)
@@ -880,6 +940,7 @@ class Program
             }
             return "";
         }
+
         
     }
     class FileErrorListener : BaseErrorListener

@@ -1,4 +1,4 @@
-// Generated from c:/Users/gheor/Desktop/Facultate/Anul II/LFC/LFC2/LFC2/OurCompiler.g4 by ANTLR 4.13.1
+// Generated from c:/Users/lupuf/Git-projects/LFC2/LFC2/OurCompiler.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -1805,6 +1805,12 @@ public class OurCompilerParser extends Parser {
 		}
 		public TerminalNode LPAR() { return getToken(OurCompilerParser.LPAR, 0); }
 		public TerminalNode RPAR() { return getToken(OurCompilerParser.RPAR, 0); }
+		public List<Pure_dataContext> pure_data() {
+			return getRuleContexts(Pure_dataContext.class);
+		}
+		public Pure_dataContext pure_data(int i) {
+			return getRuleContext(Pure_dataContext.class,i);
+		}
 		public List<TerminalNode> COMMA() { return getTokens(OurCompilerParser.COMMA); }
 		public TerminalNode COMMA(int i) {
 			return getToken(OurCompilerParser.COMMA, i);
@@ -1834,33 +1840,71 @@ public class OurCompilerParser extends Parser {
 			match(VARIABLE_NAME);
 			setState(241);
 			match(LPAR);
-			setState(250);
+			setState(256);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==VARIABLE_NAME) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 272678883688448L) != 0)) {
 				{
-				setState(242);
-				match(VARIABLE_NAME);
-				setState(247);
+				setState(244);
+				_errHandler.sync(this);
+				switch (_input.LA(1)) {
+				case VARIABLE_NAME:
+					{
+					setState(242);
+					match(VARIABLE_NAME);
+					}
+					break;
+				case INT_NUMBER:
+				case DOUBLE_NUMBER:
+				case FLOAT_NUMBER:
+				case STRING_LITERAL:
+					{
+					setState(243);
+					pure_data();
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
+				}
+				setState(253);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(243);
+					setState(246);
 					match(COMMA);
-					setState(244);
-					match(VARIABLE_NAME);
-					}
-					}
 					setState(249);
+					_errHandler.sync(this);
+					switch (_input.LA(1)) {
+					case VARIABLE_NAME:
+						{
+						setState(247);
+						match(VARIABLE_NAME);
+						}
+						break;
+					case INT_NUMBER:
+					case DOUBLE_NUMBER:
+					case FLOAT_NUMBER:
+					case STRING_LITERAL:
+						{
+						setState(248);
+						pure_data();
+						}
+						break;
+					default:
+						throw new NoViableAltException(this);
+					}
+					}
+					}
+					setState(255);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(252);
+			setState(258);
 			match(RPAR);
 			}
 		}
@@ -1876,7 +1920,7 @@ public class OurCompilerParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001/\u00ff\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001/\u0105\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
@@ -1912,12 +1956,13 @@ public class OurCompilerParser extends Parser {
 		"\u0011\u00de\b\u0011\u0001\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001"+
 		"\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0003\u0012\u00e9"+
 		"\b\u0012\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0013\u0003\u0013\u00ef"+
-		"\b\u0013\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0005"+
-		"\u0014\u00f6\b\u0014\n\u0014\f\u0014\u00f9\t\u0014\u0003\u0014\u00fb\b"+
-		"\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0000\u0000\u0015\u0000\u0002"+
+		"\b\u0013\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0003\u0014\u00f5"+
+		"\b\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0003\u0014\u00fa\b\u0014"+
+		"\u0005\u0014\u00fc\b\u0014\n\u0014\f\u0014\u00ff\t\u0014\u0003\u0014\u0101"+
+		"\b\u0014\u0001\u0014\u0001\u0014\u0001\u0014\u0000\u0000\u0015\u0000\u0002"+
 		"\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u001c\u001e"+
 		" \"$&(\u0000\u0006\u0001\u0000,/\u0001\u0000\u0003\u0006\u0001\u0000\u000e"+
-		"\u0012\u0001\u0000\u001c!\u0001\u0000\u0013\u0014\u0001\u0000\"#\u0110"+
+		"\u0012\u0001\u0000\u001c!\u0001\u0000\u0013\u0014\u0001\u0000\"#\u0118"+
 		"\u0000*\u0001\u0000\u0000\u0000\u0002-\u0001\u0000\u0000\u0000\u00041"+
 		"\u0001\u0000\u0000\u0000\u00065\u0001\u0000\u0000\u0000\bH\u0001\u0000"+
 		"\u0000\u0000\nJ\u0001\u0000\u0000\u0000\fL\u0001\u0000\u0000\u0000\u000e"+
@@ -2028,15 +2073,19 @@ public class OurCompilerParser extends Parser {
 		"\u0000\u00ed\u00ef\u0003\u0006\u0003\u0000\u00ee\u00eb\u0001\u0000\u0000"+
 		"\u0000\u00ee\u00ec\u0001\u0000\u0000\u0000\u00ee\u00ed\u0001\u0000\u0000"+
 		"\u0000\u00ef\'\u0001\u0000\u0000\u0000\u00f0\u00f1\u0005+\u0000\u0000"+
-		"\u00f1\u00fa\u0005$\u0000\u0000\u00f2\u00f7\u0005+\u0000\u0000\u00f3\u00f4"+
-		"\u0005)\u0000\u0000\u00f4\u00f6\u0005+\u0000\u0000\u00f5\u00f3\u0001\u0000"+
-		"\u0000\u0000\u00f6\u00f9\u0001\u0000\u0000\u0000\u00f7\u00f5\u0001\u0000"+
-		"\u0000\u0000\u00f7\u00f8\u0001\u0000\u0000\u0000\u00f8\u00fb\u0001\u0000"+
-		"\u0000\u0000\u00f9\u00f7\u0001\u0000\u0000\u0000\u00fa\u00f2\u0001\u0000"+
-		"\u0000\u0000\u00fa\u00fb\u0001\u0000\u0000\u0000\u00fb\u00fc\u0001\u0000"+
-		"\u0000\u0000\u00fc\u00fd\u0005%\u0000\u0000\u00fd)\u0001\u0000\u0000\u0000"+
-		"\u001e-5:?CHT^bnpv\u0082\u0085\u008f\u0098\u009f\u00a1\u00ab\u00b3\u00be"+
-		"\u00c6\u00c8\u00ce\u00d5\u00dd\u00e8\u00ee\u00f7\u00fa";
+		"\u00f1\u0100\u0005$\u0000\u0000\u00f2\u00f5\u0005+\u0000\u0000\u00f3\u00f5"+
+		"\u0003\u0000\u0000\u0000\u00f4\u00f2\u0001\u0000\u0000\u0000\u00f4\u00f3"+
+		"\u0001\u0000\u0000\u0000\u00f5\u00fd\u0001\u0000\u0000\u0000\u00f6\u00f9"+
+		"\u0005)\u0000\u0000\u00f7\u00fa\u0005+\u0000\u0000\u00f8\u00fa\u0003\u0000"+
+		"\u0000\u0000\u00f9\u00f7\u0001\u0000\u0000\u0000\u00f9\u00f8\u0001\u0000"+
+		"\u0000\u0000\u00fa\u00fc\u0001\u0000\u0000\u0000\u00fb\u00f6\u0001\u0000"+
+		"\u0000\u0000\u00fc\u00ff\u0001\u0000\u0000\u0000\u00fd\u00fb\u0001\u0000"+
+		"\u0000\u0000\u00fd\u00fe\u0001\u0000\u0000\u0000\u00fe\u0101\u0001\u0000"+
+		"\u0000\u0000\u00ff\u00fd\u0001\u0000\u0000\u0000\u0100\u00f4\u0001\u0000"+
+		"\u0000\u0000\u0100\u0101\u0001\u0000\u0000\u0000\u0101\u0102\u0001\u0000"+
+		"\u0000\u0000\u0102\u0103\u0005%\u0000\u0000\u0103)\u0001\u0000\u0000\u0000"+
+		" -5:?CHT^bnpv\u0082\u0085\u008f\u0098\u009f\u00a1\u00ab\u00b3\u00be\u00c6"+
+		"\u00c8\u00ce\u00d5\u00dd\u00e8\u00ee\u00f4\u00f9\u00fd\u0100";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
