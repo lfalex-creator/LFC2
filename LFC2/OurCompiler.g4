@@ -64,6 +64,7 @@ var_decl_assg_expr:
 		pure_data
 		| VARIABLE_NAME
 		| math_expr
+		| function_call_expr
 	);
 
 if_expr:
