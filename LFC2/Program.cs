@@ -84,7 +84,7 @@ class Program
         bool isRecursive = false;
         ArrayList<string> structures = new ArrayList<string>();
         ArrayList<string> ifs = new ArrayList<string>();
-        ArrayList<Tuple<string, string,string>> localVariables = new ArrayList<Tuple<string, string,string>>();
+        ArrayList<Tuple<string, string, string>> localVariables = new ArrayList<Tuple<string, string, string>>();
         string currentFunctionName = "";
         public override string VisitFunction([NotNull] OurCompilerParser.FunctionContext context)
         {
@@ -173,13 +173,13 @@ class Program
         public override string VisitVar_declar_expr([NotNull] OurCompilerParser.Var_declar_exprContext context)
         {
             string aux;
-            localVariables.Add(new Tuple<string,string, string>(context.data_type().GetText(),context.VARIABLE_NAME().GetText(), ""));
+            localVariables.Add(new Tuple<string, string, string>(context.data_type().GetText(), context.VARIABLE_NAME().GetText(), ""));
             return base.VisitVar_declar_expr(context);
         }
         public override string VisitVar_decl_assg_expr([NotNull] OurCompilerParser.Var_decl_assg_exprContext context)
         {
             string aux;
-            localVariables.Add(new Tuple<string,string, string>(context.data_type().GetText(), context.GetChild(1).GetText(), context.GetChild(3).GetText()));
+            localVariables.Add(new Tuple<string, string, string>(context.data_type().GetText(), context.GetChild(1).GetText(), context.GetChild(3).GetText()));
             return base.VisitVar_decl_assg_expr(context);
         }
         public override string VisitProgram([NotNull] OurCompilerParser.ProgramContext context)
@@ -206,6 +206,7 @@ class Program
         private HashSet<string> _functionNames = new HashSet<string>();
         private Dictionary<string, ArrayList<int>> _functionParameterNumber = new Dictionary<string, ArrayList<int>>();
         private Dictionary<string, ArrayList<ArrayList<string>>> _functionParameterTypes = new Dictionary<string, ArrayList<ArrayList<string>>>();
+        private Dictionary<string, string> _functionReturnTypes = new Dictionary<string, string>();
         public override string VisitProgram([NotNull] OurCompilerParser.ProgramContext context)
         {
 
@@ -249,6 +250,8 @@ class Program
                             paramTypesList.Add(paramType);
                         }
                         _functionParameterTypes[funcName].Add(paramTypesList);
+                        _functionReturnTypes[funcNameWithPar] = context.function(i).GetChild(0).GetText();
+
                         continue;
                     }
                     for (int j = 1; j < context.function(i).VARIABLE_NAME().Length; j++)
@@ -267,6 +270,8 @@ class Program
 
                     }
                     _functionParameterTypes[funcName].Add(paramTypesList);
+                    _functionReturnTypes[funcNameWithPar] = context.function(i).GetChild(0).GetText();
+
                 }
                 else
                 {
@@ -416,9 +421,10 @@ class Program
                         }
                     }
                 }
-                if(context.function_call_expr() != null)
+                if (context.function_call_expr() != null)
                 {
-                    string calledFuncName = context.function_call_expr().VARIABLE_NAME(0).GetText();
+                    var call = context.function_call_expr();
+                    string calledFuncName = call.VARIABLE_NAME(0).GetText();
                     if (!_functionNames.Contains(calledFuncName))
                     {
                         int line = context.Start.Line;
@@ -426,8 +432,49 @@ class Program
                         _sb.AppendLine(message);
                         return false;
                     }
+                    var argTypes = new List<string>();
+                    for (int i = 1; i < call.ChildCount; i++)
+                    {
+                        var child = call.GetChild(i);
+                        if (child is OurCompilerParser.Pure_dataContext pd)
+                        {
+                            dynamic v = EvaluatePureData(pd);
+                            if (v is int) argTypes.Add("int");
+                            else if (v is float) argTypes.Add("float");
+                            else if (v is double) argTypes.Add("double");
+                            else if (v is string) argTypes.Add("string");
+                        }
+                        else if (child is ITerminalNode terminal && terminal.Symbol.Type == OurCompilerParser.VARIABLE_NAME)
+                        {
+                            string var = terminal.GetText();
+                            if (!_globalVariables.ContainsKey(var))
+                            {
+                                int line = context.Start.Line;
+                                string message = $"Error: undeclared variable '{var}' at line {line}";
+                                _sb.AppendLine(message);
+                                return false;
+                            }
+                            argTypes.Add(_globalVariables[var]);
+                        }
+                    }
+                    string calledSignature = calledFuncName + "(" + string.Join(", ", argTypes) + ")";
+                    if (!_functionReturnTypes.TryGetValue(calledSignature, out string returnType))
+                    {
+                        int line = context.Start.Line;
+                        string message = $"Error: function '{calledFuncName}' called with incorrect argument types at line {line}";
+                        _sb.AppendLine(message);
+                        return false;
+                    }
+                    if (type != returnType)
+                    {
+                        int line = context.Start.Line;
+                        string message = $"Error: type mismatch for variable '{varName}' at line {line}";
+                        _sb.AppendLine(message);
+                        return false;
+                    }
                 }
                 _globalVariables.Add(varName, type);
+
             }
             else if (context.Parent.Parent.Parent is OurCompilerParser.FunctionContext func)
             {
@@ -500,6 +547,80 @@ class Program
                         }
                     }
                 }
+                if (context.function_call_expr() != null)
+                {
+                    var call = context.function_call_expr();
+                    string calledFuncName = call.VARIABLE_NAME(0).GetText();
+                    if (!_functionNames.Contains(calledFuncName))
+                    {
+                        int line = context.Start.Line;
+                        string message = $"Error: undeclared function '{calledFuncName}' at line {line}";
+                        _sb.AppendLine(message);
+                        return false;
+                    }
+                    var argTypes = new List<string>();
+                    for (int i = 1; i < call.ChildCount; i++)
+                    {
+                        var child = call.GetChild(i);
+                        if (child is OurCompilerParser.Pure_dataContext pd)
+                        {
+                            dynamic v = EvaluatePureData(pd);
+                            if (v is int) argTypes.Add("int");
+                            else if (v is float) argTypes.Add("float");
+                            else if (v is double) argTypes.Add("double");
+                            else if (v is string) argTypes.Add("string");
+                        }
+                        else if (child is ITerminalNode terminal && terminal.Symbol.Type == OurCompilerParser.VARIABLE_NAME)
+                        {
+                            string var = terminal.GetText();
+                            string varType = null;
+                            bool found = false;
+                            ParserRuleContext parent = context;
+                            while (parent != null && !(parent is OurCompilerParser.FunctionContext))
+                            {
+                                parent = parent.Parent as ParserRuleContext;
+                            }
+                            if (parent is OurCompilerParser.FunctionContext funcContext)
+                            {
+                                string funcFullName = functionNameConstructor(funcContext.VARIABLE_NAME(0).GetText(), funcContext);
+                                if (_functions[funcFullName].ContainsKey(var))
+                                {
+                                    varType = _functions[funcFullName][var];
+                                    found = true;
+                                }
+                            }
+                            if (!found && _globalVariables.ContainsKey(var))
+                            {
+                                varType = _globalVariables[var];
+                                found = true;
+                            }
+                            if (found)
+                                argTypes.Add(varType);
+                            else
+                            {
+                                int line = context.Start.Line;
+                                string message = $"Error: undeclared variable '{var}' at line {line}";
+                                _sb.AppendLine(message);
+                                return false;
+                            }
+                        }
+                    }
+                    string calledSignature = calledFuncName + "(" + string.Join(", ", argTypes) + ")";
+                    if (!_functionReturnTypes.TryGetValue(calledSignature, out string returnType))
+                    {
+                        int line = context.Start.Line;
+                        string message = $"Error: function '{calledFuncName}' called with incorrect argument types at line {line}";
+                        _sb.AppendLine(message);
+                        return false;
+                    }
+                    if (type != returnType)
+                    {
+                        int line = context.Start.Line;
+                        string message = $"Error: type mismatch for variable '{varName}' at line {line}";
+                        _sb.AppendLine(message);
+                        return false;
+                    }
+                }
                 _functions[funcName].Add(varName, type);
             }
             return true;
@@ -516,7 +637,7 @@ class Program
             }
             string varName = context.VARIABLE_NAME(0).GetText();
 
-            if (IsVariableInitializedCorrectly(varName, type, context))
+            if (!IsVariableInitializedCorrectly(varName, type, context))
             {
                 return $"Error for variable '{varName}' at line {context.Start.Line}";
             }
@@ -537,6 +658,7 @@ class Program
             }
 
 
+
             return "";
         }
 
@@ -544,7 +666,7 @@ class Program
         {
             string varName = context.VARIABLE_NAME(0).GetText();
 
-            if (context.pure_data()!= null)
+            if (context.pure_data() != null)
             {
                 dynamic value = EvaluatePureData(context.pure_data());
                 if (!IsVariableDeclared(varName, context))
@@ -553,9 +675,9 @@ class Program
                     _sb.AppendLine(message);
                     return message + "\n";
                 }
-                if(context.Parent is OurCompilerParser.ProgramContext)
+                if (context.Parent is OurCompilerParser.ProgramContext)
                 {
-                    if (!IsTypeCompatible(_globalVariables[varName],value))
+                    if (!IsTypeCompatible(_globalVariables[varName], value))
                     {
                         string message = $"Error: mismatched types at assignment to variable '{varName}' at line {context.Start.Line}";
                         _sb.AppendLine(message);
@@ -564,9 +686,9 @@ class Program
                 }
                 else
                 {
-                    var func= context.Parent.Parent.Parent as OurCompilerParser.FunctionContext;
+                    var func = context.Parent.Parent.Parent as OurCompilerParser.FunctionContext;
                     var funcName = functionNameConstructor(func.VARIABLE_NAME(0).GetText(), func);
-                    if (!IsTypeCompatible(_functions[funcName][varName],value))
+                    if (!IsTypeCompatible(_functions[funcName][varName], value))
                     {
                         string message = $"Error: mismatched types at assignment to variable '{varName}' at line {context.Start.Line}";
                         _sb.AppendLine(message);
@@ -645,11 +767,11 @@ class Program
         private string functionNameConstructor(string baseName, OurCompilerParser.FunctionContext context)
         {
             baseName = baseName + "(";
-            if(context.VOID() != null)
+            if (context.VOID() != null)
             {
                 for (int i = 1; i < context.VARIABLE_NAME().Length; i++)
                 {
-                    string paramType = context.data_type(i-1).GetText();
+                    string paramType = context.data_type(i - 1).GetText();
                     if (!typeDef.IsMatch(paramType))
                     {
                         int line = context.Start.Line;
@@ -685,30 +807,32 @@ class Program
         }
         public override string VisitExpression_generator([NotNull] OurCompilerParser.Expression_generatorContext context)
         {
-            bool hasReturn = false;
-            string type = context.Parent is OurCompilerParser.FunctionContext func ? func.GetChild(0).GetText() : "";
-            for (int i = 0; i < context.expression().Length; i++)
+            if (context.Parent is OurCompilerParser.FunctionContext == true)
             {
-                if (context.expression(i).return_expr() != null)
+                bool hasReturn = false;
+                string type = context.Parent is OurCompilerParser.FunctionContext func ? func.GetChild(0).GetText() : "";
+                for (int i = 0; i < context.expression().Length; i++)
                 {
-                    hasReturn = true;
-                    break;
+                    if (context.expression(i).return_expr() != null)
+                    {
+                        hasReturn = true;
+                        break;
+                    }
+                }
+
+                if (!hasReturn && type != "void")
+                {
+                    int line = context.Start.Line;
+                    string message = $"Error: missing return statement in non-void function at line {line}";
+                    _sb.AppendLine(message);
+                }
+                else if (hasReturn && type == "void")
+                {
+                    int line = context.Start.Line;
+                    string message = $"Error: return statement with a value in void function at line {line}";
+                    _sb.AppendLine(message);
                 }
             }
-
-            if (!hasReturn && type != "void")
-            {
-                int line = context.Start.Line;
-                string message = $"Error: missing return statement in non-void function at line {line}";
-                _sb.AppendLine(message);
-            }
-            else if (hasReturn && type == "void")
-            {
-                int line = context.Start.Line;
-                string message = $"Error: return statement with a value in void function at line {line}";
-                _sb.AppendLine(message);
-            }
-
             for (int i = 0; i < context.ChildCount; i++)
             {
                 Visit(context.GetChild(i));
@@ -862,7 +986,7 @@ class Program
             for (int i = 1; i < context.ChildCount; i++)
             {
                 var child = context.GetChild(i);
-                if(child is OurCompilerParser.Pure_dataContext)
+                if (child is OurCompilerParser.Pure_dataContext)
                 {
                     dynamic value = EvaluatePureData((OurCompilerParser.Pure_dataContext)child);
                     if (value is int)
@@ -874,19 +998,19 @@ class Program
                     else if (value is string)
                         argTypes.Add("string");
                 }
-                else if(child is ITerminalNode terminal)
+                else if (child is ITerminalNode terminal)
                 {
-                    if(terminal.Symbol.Type == OurCompilerParser.VARIABLE_NAME)
+                    if (terminal.Symbol.Type == OurCompilerParser.VARIABLE_NAME)
                     {
                         string varName = terminal.GetText();
                         string varType = null;
                         bool found = false;
                         ParserRuleContext parent = context;
-                        while(context.Parent !=null && !(parent is OurCompilerParser.FunctionContext))
+                        while (context.Parent != null && !(parent is OurCompilerParser.FunctionContext))
                         {
                             parent = parent.Parent as ParserRuleContext;
                         }
-                        if(parent is OurCompilerParser.FunctionContext funcContext)
+                        if (parent is OurCompilerParser.FunctionContext funcContext)
                         {
                             string funcFullName = functionNameConstructor(funcContext.VARIABLE_NAME(0).GetText(), funcContext);
                             if (_functions[funcFullName].ContainsKey(varName))
@@ -895,12 +1019,12 @@ class Program
                                 found = true;
                             }
                         }
-                        if(!found && _globalVariables.ContainsKey(varName))
+                        if (!found && _globalVariables.ContainsKey(varName))
                         {
                             varType = _globalVariables[varName];
                             found = true;
                         }
-                        if(found)
+                        if (found)
                             argTypes.Add(varType);
                         else
                         {
@@ -914,14 +1038,14 @@ class Program
             }
             var overloads = _functionParameterTypes[funcName];
             bool incompatible = true;
-            foreach(var overload in overloads)
+            foreach (var overload in overloads)
             {
-                if(overload.Count == totalParamsNr)
+                if (overload.Count == totalParamsNr)
                 {
                     bool match = true;
-                    for(int i = 0; i < overload.Count; i++)
+                    for (int i = 0; i < overload.Count; i++)
                     {
-                        if(overload[i] != argTypes[i])
+                        if (overload[i] != argTypes[i])
                         {
                             match = false;
                             incompatible = true;
@@ -941,7 +1065,7 @@ class Program
             return "";
         }
 
-        
+
     }
     class FileErrorListener : BaseErrorListener
     {

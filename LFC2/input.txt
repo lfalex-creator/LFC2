@@ -8,6 +8,7 @@ void suma(int a,int b)
 	int a;
 	suma(a,b);
 }
+
 int x = z;
 string p;
 int a = z+p/2;
@@ -34,8 +35,9 @@ int main()
 	else
 		xoy=s;
 	s=s*2;
+	s=suma(s,x);
 	diferenta(s,z);
-	int sum = suma(s,f);
+	int sum = suma(s,x);
 	suma(3.5,z);
 	suma(4,c);
 	suma(s,y);
