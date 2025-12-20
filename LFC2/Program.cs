@@ -895,7 +895,6 @@ class Program
                         return false;
                     }
                 }
-                _functions[funcName].Add(varName, type);
             }
             return true;
         }
@@ -950,25 +949,14 @@ class Program
                 }
                 else
                 {
-                    if (IsConstVariable(context, varName))
-                    {
-                        string message = $"Error: assignment to constant variable '{varName}' at line {context.Start.Line}";
-                        _sb.AppendLine(message);
-                        return message + "\n";
-                    }
-                    OurCompilerParser.FunctionContext func;
-                    if(context.Parent.Parent.Parent is OurCompilerParser.FunctionContext)
-                        func = context.Parent.Parent.Parent as OurCompilerParser.FunctionContext;
-                    else
-                        func = context.Parent.Parent.Parent.Parent.Parent as OurCompilerParser.FunctionContext;
-                var funcName = functionNameConstructor(func.VARIABLE_NAME(0).GetText(), func);
-                    if (!IsTypeCompatible(_functions[funcName][varName], value))
-                    {
-                        string message = $"Error: mismatched types at assignment to variable '{varName}' at line {context.Start.Line}";
-                        _sb.AppendLine(message);
-                        return message + "\n";
-                    }
-                }
+                OurCompilerParser.FunctionContext func;
+                if(context.Parent.Parent.Parent is OurCompilerParser.FunctionContext)
+                    func = context.Parent.Parent.Parent as OurCompilerParser.FunctionContext;
+                else
+                    func = context.Parent.Parent.Parent.Parent.Parent as OurCompilerParser.FunctionContext;
+                var funcName=functionNameConstructor(func.VARIABLE_NAME(0).GetText(), func);
+                IsVariableInitializedCorrectly(varName, _functions[funcName][varName], context);
+            }
             return "";
         }
         private bool IsConstVariable(OurCompilerParser.Var_assign_exprContext context, string varName)
