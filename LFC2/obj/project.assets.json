@@ -40,23 +40,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\gheor\\.nuget\\packages\\": {},
+    "C:\\Users\\lupuf\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\LFC2.csproj",
+      "projectUniqueName": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\LFC2.csproj",
       "projectName": "LFC2",
-      "projectPath": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\LFC2.csproj",
-      "packagesPath": "C:\\Users\\gheor\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\obj\\",
+      "projectPath": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\LFC2.csproj",
+      "packagesPath": "C:\\Users\\lupuf\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\gheor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\lupuf\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -83,7 +83,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -110,7 +110,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

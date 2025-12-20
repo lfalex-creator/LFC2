@@ -1,18 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\",
+  "WorkspaceRootPath": "C:\\Users\\lupuf\\Git-projects\\LFC2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\gheor\\desktop\\facultate\\anul ii\\lfc\\lfc2\\lfc2\\input.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\input.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\lupuf\\git-projects\\lfc2\\lfc2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\gheor\\desktop\\facultate\\anul ii\\lfc\\lfc2\\lfc2\\errors.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\lupuf\\git-projects\\lfc2\\lfc2\\errors.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\errors.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\gheor\\desktop\\facultate\\anul ii\\lfc\\lfc2\\lfc2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\lupuf\\git-projects\\lfc2\\lfc2\\input.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\input.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 294,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,13 +34,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "input.txt",
-              "DocumentMoniker": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\input.txt",
+              "DocumentMoniker": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\input.txt",
               "RelativeDocumentMoniker": "LFC2\\input.txt",
-              "ToolTip": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\input.txt",
+              "ToolTip": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\input.txt",
               "RelativeToolTip": "LFC2\\input.txt",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAAC0AAAATAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAABoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
               "WhenOpened": "2025-12-20T14:25:30.855Z",
               "EditorCaption": ""
@@ -49,24 +49,24 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "errors.txt",
-              "DocumentMoniker": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\errors.txt",
+              "DocumentMoniker": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\errors.txt",
               "RelativeDocumentMoniker": "LFC2\\errors.txt",
-              "ToolTip": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\errors.txt",
+              "ToolTip": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\errors.txt",
               "RelativeToolTip": "LFC2\\errors.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
               "WhenOpened": "2025-12-19T17:53:14.474Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\Program.cs",
               "RelativeDocumentMoniker": "LFC2\\Program.cs",
-              "ToolTip": "C:\\Users\\gheor\\Desktop\\Facultate\\Anul II\\LFC\\LFC2\\LFC2\\Program.cs",
+              "ToolTip": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\Program.cs",
               "RelativeToolTip": "LFC2\\Program.cs",
-              "ViewState": "AgIAAFgFAAAAAAAAAAAcwOsEAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAOwFAAAAAAAAAAAqwPAFAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-06T11:05:03.549Z",
               "EditorCaption": ""

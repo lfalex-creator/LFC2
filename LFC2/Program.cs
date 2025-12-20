@@ -646,6 +646,14 @@ class Program
                     string calledSignature = calledFuncName + "(" + string.Join(", ", argTypes) + ")";
                     if (!_functionReturnTypes.TryGetValue(calledSignature, out string returnType) && !_functionReturnTypes.TryGetValue(removeConst(calledSignature), out returnType))
                     {
+                        bool ok = false;
+                        foreach(var function in _functions)
+                            if(IsCompatibleWithOverloads(function.Key.Substring(0,function.Key.IndexOf('(')),argTypes,context))
+                            {
+                                ok = true;
+                                break;
+                            }
+                        if (!ok)
                         {
                             int line = context.Start.Line;
                             string message = $"Error: function '{calledFuncName}' called with incorrect argument types at line {line}";
@@ -664,6 +672,48 @@ class Program
                 _functions[funcName].Add(varName, type);
             }
             return true;
+        }
+        private bool IsCompatibleWithOverloads(string funcName, List<string> argTypes, OurCompilerParser.Var_assign_exprContext context)
+        {
+            var paramTypeLists = _functionParameterTypes[funcName];
+            foreach (var paramTypes in paramTypeLists)
+            {
+                if (paramTypes.Count != argTypes.Count)
+                    continue;
+                bool allMatch = true;
+                for (int i = 0; i < paramTypes.Count; i++)
+                {
+                    if (!IsAssignableFrom(paramTypes[i], argTypes[i]))
+                    {
+                        allMatch = false;
+                        break;
+                    }
+                }
+                if (allMatch)
+                    return true;
+            }
+            return false;
+        }
+        private bool IsCompatibleWithOverloads(string funcName, List<string> argTypes, OurCompilerParser.Var_decl_assg_exprContext context)
+        {
+            var paramTypeLists = _functionParameterTypes[funcName];
+            foreach (var paramTypes in paramTypeLists)
+            {
+                if (paramTypes.Count != argTypes.Count)
+                    continue;
+                bool allMatch = true;
+                for (int i = 0; i < paramTypes.Count; i++)
+                {
+                    if (!IsAssignableFrom(paramTypes[i], argTypes[i]))
+                    {
+                        allMatch = false;
+                        break;
+                    }
+                }
+                if (allMatch)
+                    return true;
+            }
+            return false;
         }
         private bool IsVariableInitializedCorrectly(string varName, string type, OurCompilerParser.Var_assign_exprContext context)
         {
@@ -771,10 +821,20 @@ class Program
                     string calledSignature = calledFuncName + "(" + string.Join(", ", argTypes) + ")";
                     if (!_functionReturnTypes.TryGetValue(calledSignature, out string returnType) && !_functionReturnTypes.TryGetValue(removeConst(calledSignature), out returnType))
                     {
-                        int line = context.Start.Line;
-                        string message = $"Error: function '{calledFuncName}' called with incorrect argument types at line {line}";
-                        _sb.AppendLine(message);
-                        return false;
+                        bool ok = false;
+                        foreach (var function in _functions)
+                            if (IsCompatibleWithOverloads(function.Key.Substring(0, function.Key.IndexOf('(')), argTypes, context))
+                            {
+                                ok = true;
+                                break;
+                            }
+                        if (!ok)
+                        {
+                            int line = context.Start.Line;
+                            string message = $"Error: function '{calledFuncName}' called with incorrect argument types at line {line}";
+                            _sb.AppendLine(message);
+                            return false;
+                        }
                     }
                     if (type != returnType)
                     {
@@ -918,10 +978,20 @@ class Program
                     string calledSignature = calledFuncName + "(" + string.Join(", ", argTypes) + ")";
                     if (!_functionReturnTypes.TryGetValue(calledSignature, out string returnType) && !_functionReturnTypes.TryGetValue(removeConst(calledSignature), out returnType))
                     {
-                        int line = context.Start.Line;
-                        string message = $"Error: function '{calledFuncName}' called with incorrect argument types at line {line}";
-                        _sb.AppendLine(message);
-                        return false;
+                        bool ok = false;
+                        foreach (var function in _functions)
+                            if (IsCompatibleWithOverloads(function.Key.Substring(0, function.Key.IndexOf('(')), argTypes, context))
+                            {
+                                ok = true;
+                                break;
+                            }
+                        if (!ok)
+                        {
+                            int line = context.Start.Line;
+                            string message = $"Error: function '{calledFuncName}' called with incorrect argument types at line {line}";
+                            _sb.AppendLine(message);
+                            return false;
+                        }
                     }
                     if (type != returnType)
                     {
