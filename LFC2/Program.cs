@@ -740,7 +740,7 @@ class Program
             }
             if (pureData.FLOAT_NUMBER() is not null)
             {
-                return float.Parse(pureData.FLOAT_NUMBER().GetText());
+                return float.Parse(pureData.FLOAT_NUMBER().GetText().Substring(0, pureData.FLOAT_NUMBER().GetText().Length-1));
             }
             if (pureData.STRING_LITERAL() is not null)
             {

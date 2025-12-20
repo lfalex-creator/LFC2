@@ -11,6 +11,10 @@
       "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\errors.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\lupuf\\git-projects\\lfc2\\lfc2\\tokens.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\tokens.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|c:\\users\\lupuf\\git-projects\\lfc2\\lfc2\\funcs.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{73DD8961-306B-4621-A921-A2558E071861}|LFC2\\LFC2.csproj|solutionrelative:lfc2\\funcs.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
@@ -26,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 294,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -39,6 +43,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "tokens.txt",
+              "DocumentMoniker": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\tokens.txt",
+              "RelativeDocumentMoniker": "LFC2\\tokens.txt",
+              "ToolTip": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\tokens.txt",
+              "RelativeToolTip": "LFC2\\tokens.txt",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAEcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-12-20T11:28:39.04Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "funcs.txt",
               "DocumentMoniker": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\funcs.txt",
               "RelativeDocumentMoniker": "LFC2\\funcs.txt",
@@ -57,7 +74,7 @@
               "RelativeDocumentMoniker": "LFC2\\errors.txt",
               "ToolTip": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\errors.txt",
               "RelativeToolTip": "LFC2\\errors.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
               "WhenOpened": "2025-12-19T17:53:14.474Z",
               "EditorCaption": ""
@@ -70,20 +87,20 @@
               "RelativeDocumentMoniker": "LFC2\\input.txt",
               "ToolTip": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\input.txt*",
               "RelativeToolTip": "LFC2\\input.txt*",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAACYAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABIAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
               "WhenOpened": "2025-12-19T17:52:50.78Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\Program.cs",
               "RelativeDocumentMoniker": "LFC2\\Program.cs",
               "ToolTip": "C:\\Users\\lupuf\\Git-projects\\LFC2\\LFC2\\Program.cs",
               "RelativeToolTip": "LFC2\\Program.cs",
-              "ViewState": "AgIAAFwAAAAAAAAAAAAmwG8AAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAANkCAAAAAAAAAAAAwOYCAAB/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-06T11:05:03.549Z",
               "EditorCaption": ""

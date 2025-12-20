@@ -69,7 +69,7 @@ Tokens:
 <FLOAT, float, 19>
 <VARIABLE_NAME, f, 19>
 <ASGN, =, 19>
-<DOUBLE_NUMBER, 0.0, 19>
+<FLOAT_NUMBER, 22.15f, 19>
 <EOL, ;, 19>
 <INT, int, 20>
 <VARIABLE_NAME, s, 20>

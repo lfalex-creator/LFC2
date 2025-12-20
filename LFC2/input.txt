@@ -16,7 +16,7 @@ int val = z+x/3;
 int main()
 {
 	int c;
-	float f=0.0;
+	float f=22.15f;
 	int s=0;
 	int d="ana";
 	int xoy=1;
