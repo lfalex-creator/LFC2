@@ -1001,16 +1001,16 @@ class Program
             switch (type)
             {
                 case "int":
-                case "const int":
+                case "constint":
                     return value is int;
                 case "float":
-                case "const float":
+                case "constfloat":
                     return value is float;
                 case "double":
-                case "const double":
+                case "constdouble":
                     return value is double;
                 case "string":
-                case "const string":
+                case "conststring":
                     return value is string;
                 default:
                     return false;

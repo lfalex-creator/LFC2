@@ -2,7 +2,6 @@ Error: type mismatch for variable 'a' at line 14
 Error: duplicated 'main' function defined at line 56
 Error: duplicated variable 'a' at line 8
 Error: type mismatch for variable 'd' at line 21
-Error: type mismatch for variable 'test' at line 23
 Error: function 'suma' called with incorrect argument types at line 28
 Error: undeclared function 'diferenta' at line 39
 Error: type mismatch for variable 'sum' at line 40
