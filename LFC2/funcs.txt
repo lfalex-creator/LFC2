@@ -16,7 +16,7 @@ Tip returnat: int
 Parametri: {}
 Strucuturi repetitive: <for,27>, <while,31>
 Structuri decizionale: <if-else,34>
-Variabile locale: (int, c, ), (float, f, 22.15f), (int, s, 0), (int, d, "ana"), (int, xoy, 1), (constint, test, 5), (string, ana2, ), (string, b, suma(2.22f,3.14f)), (int, i, 1), (int, sum, suma(s,x))
+Variabile locale: (int, c, ), (float, f, 22.15f), (int, s, 0), (int, d, "ana"), (int, xoy, 1), (constint, test, 5), (string, ana2, ), (string, b, suma(2.22,3.14)), (int, i, 1), (int, sum, suma(s,x))
 >
 
 <

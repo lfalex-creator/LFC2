@@ -109,9 +109,9 @@ Tokens:
 <ASGN, =, 26>
 <VARIABLE_NAME, suma, 26>
 <LPAR, (, 26>
-<FLOAT_NUMBER, 2.22f, 26>
+<DOUBLE_NUMBER, 2.22, 26>
 <COMMA, ,, 26>
-<FLOAT_NUMBER, 3.14f, 26>
+<DOUBLE_NUMBER, 3.14, 26>
 <RPAR, ), 26>
 <EOL, ;, 26>
 <FOR, for, 27>

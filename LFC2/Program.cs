@@ -612,10 +612,12 @@ class Program
                     string calledSignature = calledFuncName + "(" + string.Join(", ", argTypes) + ")";
                     if (!_functionReturnTypes.TryGetValue(calledSignature, out string returnType) && !_functionReturnTypes.TryGetValue(removeConst(calledSignature), out returnType))
                     {
-                        int line = context.Start.Line;
-                        string message = $"Error: function '{calledFuncName}' called with incorrect argument types at line {line}";
-                        _sb.AppendLine(message);
-                        return false;
+                        {
+                            int line = context.Start.Line;
+                            string message = $"Error: function '{calledFuncName}' called with incorrect argument types at line {line}";
+                            _sb.AppendLine(message);
+                            return false;
+                        }
                     }
                     if (type != returnType)
                     {
