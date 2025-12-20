@@ -107,7 +107,11 @@ class Program
 
             int bodyLength = context.expression_generator().children.Count;
             for (int j = 0; j < bodyLength; j++)
-                Visit(context.expression_generator().GetChild(j).GetChild(0));
+            {
+                var child = context.expression_generator().GetChild(j);
+                Visit(child.GetChild(0));
+            }
+                
 
 
 

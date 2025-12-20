@@ -57,7 +57,12 @@ expression: (
 var_declar_expr: data_type VARIABLE_NAME;
 
 var_assign_expr:
-	VARIABLE_NAME ASGN (pure_data | VARIABLE_NAME | math_expr);
+	VARIABLE_NAME ASGN (
+		pure_data
+		| VARIABLE_NAME
+		| math_expr
+		| function_call_expr
+	);
 
 var_decl_assg_expr:
 	data_type VARIABLE_NAME ASGN (
