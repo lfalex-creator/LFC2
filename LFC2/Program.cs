@@ -6,9 +6,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
+
+
 class Program
 {
-
+    
     class GlobalVarVisitor : OurCompilerBaseVisitor<string>
     {
         public override string VisitPure_data([NotNull] OurCompilerParser.Pure_dataContext context)
@@ -211,8 +213,40 @@ class Program
         private Dictionary<string, ArrayList<int>> _functionParameterNumber = new Dictionary<string, ArrayList<int>>();
         private Dictionary<string, ArrayList<ArrayList<string>>> _functionParameterTypes = new Dictionary<string, ArrayList<ArrayList<string>>>();
         private Dictionary<string, string> _functionReturnTypes = new Dictionary<string, string>();
+
+
+        private string NormalizeType(string t)
+        {
+            if (string.IsNullOrEmpty(t)) return t;
+            return t.Replace("const", "").Trim();
+        }
+
+        // Check assignability with promotions: int -> float -> double
+        private bool IsAssignableFrom(string targetType, string sourceType)
+        {
+            targetType = NormalizeType(targetType);
+            sourceType = NormalizeType(sourceType);
+            if (targetType == sourceType) return true;
+            if (sourceType == "int" && (targetType == "float" || targetType == "double")) return true;
+            if (sourceType == "float" && targetType == "double") return true;
+            return false;
+        }
+
+        // Value compatibility: determines runtime literal -> type and then uses IsAssignableFrom
+        private bool IsValueCompatible(string targetType, dynamic value)
+        {
+            if (value == null) return true;
+            string valType;
+            if (value is int) valType = "int";
+            else if (value is float) valType = "float";
+            else if (value is double) valType = "double";
+            else if (value is string) valType = "string";
+            else return false;
+            return IsAssignableFrom(targetType, valType);
+        }
         public override string VisitProgram([NotNull] OurCompilerParser.ProgramContext context)
         {
+
 
             for (int i = 0; i < context.var_declar_expr().Length; i++)
             {
@@ -385,7 +419,7 @@ class Program
                         return false;
                     }
                     string assignedVarType = _globalVariables[assignedVarName];
-                    if (type != assignedVarType)
+                    if (!IsAssignableFrom(type, assignedVarType))
                     {
                         int line = context.Start.Line;
                         string message = $"Error: type mismatch for variable '{varName}' at line {line}";
@@ -398,7 +432,7 @@ class Program
                     for (int i = 0; i < context.math_expr().pure_data().Length; i++)
                     {
                         dynamic exprValue = EvaluatePureData(context.math_expr().pure_data(i));
-                        if (!IsTypeCompatible(type, exprValue))
+                        if (!IsValueCompatible(type, exprValue))
                         {
                             int line = context.Start.Line;
                             string message = $"Error: type mismatch for variable '{varName}' at line {line}";
@@ -416,7 +450,7 @@ class Program
                             _sb.AppendLine(message);
                             return false;
                         }
-                        if (type != _globalVariables[usedVarName])
+                        if (!IsAssignableFrom(type, _globalVariables[usedVarName]))
                         {
                             int line = context.Start.Line;
                             string message = $"Error: type mismatch for variable '{varName}' at line {line}";
@@ -469,7 +503,7 @@ class Program
                         _sb.AppendLine(message);
                         return false;
                     }
-                    if (type != returnType)
+                    if (!IsAssignableFrom(type, returnType))
                     {
                         int line = context.Start.Line;
                         string message = $"Error: type mismatch for variable '{varName}' at line {line}";
@@ -511,7 +545,7 @@ class Program
                     {
                         assignedVarType = _functions[funcName][assignedVarName];
                     }
-                    if (type != assignedVarType)
+                    if (!IsAssignableFrom(type, assignedVarType))
                     {
                         int line = context.Start.Line;
                         string message = $"Error: type mismatch for variable '{varName}' at line {line}";
@@ -542,7 +576,7 @@ class Program
                             _sb.AppendLine(message);
                             return false;
                         }
-                        if (type != _functions[funcName][usedVarName])
+                        if (!IsAssignableFrom(type, _functions[funcName][usedVarName]))
                         {
                             int line = context.Start.Line;
                             string message = $"Error: type mismatch for variable '{varName}' at line {line}";
@@ -619,13 +653,13 @@ class Program
                             return false;
                         }
                     }
-                    if (type != returnType)
+                    if (!IsAssignableFrom(type, returnType))
                     {
                         int line = context.Start.Line;
                         string message = $"Error: type mismatch for variable '{varName}' at line {line}";
                         _sb.AppendLine(message);
                         return false;
-                    }
+                    }   
                 }
                 _functions[funcName].Add(varName, type);
             }
@@ -986,25 +1020,26 @@ class Program
         }
         private bool IsTypeCompatible(string type, dynamic value)
         {
-            if (value == null)
-                return true;
-            switch (type)
-            {
-                case "int":
-                case "constint":
-                    return value is int;
-                case "float":
-                case "constfloat":
-                    return value is float;
-                case "double":
-                case "constdouble":
-                    return value is double;
-                case "string":
-                case "conststring":
-                    return value is string;
-                default:
-                    return false;
-            }
+            //if (value == null)
+            //    return true;
+            //switch (type)
+            //{
+            //    case "int":
+            //    case "constint":
+            //        return value is int;
+            //    case "float":
+            //    case "constfloat":
+            //        return value is float;
+            //    case "double":
+            //    case "constdouble":
+            //        return value is double;
+            //    case "string":
+            //    case "conststring":
+            //        return value is string;
+            //    default:
+            //        return false;
+            //}
+            return IsValueCompatible(type, value);
         }
         private dynamic EvaluatePureData(OurCompilerParser.Pure_dataContext pureData)
         {
@@ -1161,7 +1196,7 @@ class Program
                 }
                 else if (_functions[funcName].ContainsKey(returnVarName))
                 {
-                    if (returnType != _functions[funcName][returnVarName])
+                    if (!IsAssignableFrom(returnType, _functions[funcName][returnVarName]))
                     {
                         int line = context.Start.Line;
                         string message = $"Error: type mismatch in return statement at line {line}";
@@ -1171,7 +1206,7 @@ class Program
                 }
                 else if (_globalVariables.ContainsKey(returnVarName))
                 {
-                    if (returnType != _globalVariables[returnVarName])
+                    if (!IsAssignableFrom(returnType, _globalVariables[returnVarName]))
                     {
                         int line = context.Start.Line;
                         string message = $"Error: type mismatch in return statement at line {line}";
@@ -1186,7 +1221,7 @@ class Program
                 for (int i = 0; i < context.math_expr().pure_data().Length; i++)
                 {
                     dynamic exprValue = EvaluatePureData(context.math_expr().pure_data(i));
-                    if (!IsTypeCompatible(returnType, exprValue))
+                    if (!IsValueCompatible(returnType, exprValue))
                     {
                         int line = context.Start.Line;
                         string message = $"Error: type mismatch in return statement at line {line}";
@@ -1206,7 +1241,7 @@ class Program
                     }
                     else if (_functions[funcName].ContainsKey(usedVarName))
                     {
-                        if (returnType != _functions[funcName][usedVarName])
+                        if (!IsAssignableFrom(returnType, _functions[funcName][usedVarName]))
                         {
                             int line = context.Start.Line;
                             string message = $"Error: type mismatch in return statement at line {line}";
@@ -1216,7 +1251,7 @@ class Program
                     }
                     else if (_globalVariables.ContainsKey(usedVarName))
                     {
-                        if (returnType != _globalVariables[usedVarName])
+                        if (!IsAssignableFrom(returnType, _globalVariables[usedVarName]))
                         {
                             int line = context.Start.Line;
                             string message = $"Error: type mismatch in return statement at line {line}";

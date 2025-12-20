@@ -23,7 +23,7 @@ int main()
 	const int test = 5;
 	string ana2;
 	ana2=suma(xoy,test);
-	string b=suma(2.22,3.14);
+	string b=suma(2.22f,3.14f);
 	for(int i=1;i<=5;i++)
 	{
 		suma("xx","yy");
@@ -42,7 +42,8 @@ int main()
 	suma(3.5,z);
 	suma(4,c);
 	suma(s,y);
-	suma(f,f);
+	double doub = suma(f,f);
+	float integer = 2;
 	suma(s,xoy, test);
 	return 0;
 }
