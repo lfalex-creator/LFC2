@@ -629,6 +629,276 @@ class Program
             }
             return true;
         }
+        private bool IsVariableInitializedCorrectly(string varName, string type, OurCompilerParser.Var_assign_exprContext context)
+        {
+            if (context.Parent is OurCompilerParser.ProgramContext)
+            {
+                if (context.VARIABLE_NAME().Length > 1)
+                {
+                    string assignedVarName = context.VARIABLE_NAME(1).GetText();
+                    if (IsConstVariable(context, varName))
+                    {
+                        string message = $"Error: assignment to constant variable '{varName}' at line {context.Start.Line}";
+                        _sb.AppendLine(message);
+                        return false;
+                    }
+                    if (!_globalVariables.ContainsKey(assignedVarName))
+                    {
+                        int line = context.Start.Line;
+                        string message = $"Error: undeclared variable '{assignedVarName}' at line {line}";
+                        _sb.AppendLine(message);
+                        return false;
+                    }
+                    string assignedVarType = _globalVariables[assignedVarName];
+                    if (type != assignedVarType)
+                    {
+                        int line = context.Start.Line;
+                        string message = $"Error: type mismatch for variable '{varName}' at line {line}";
+                        _sb.AppendLine(message);
+                        return false;
+                    }
+                }
+                if (context.math_expr() != null)
+                {
+                    for (int i = 0; i < context.math_expr().pure_data().Length; i++)
+                    {
+                        dynamic exprValue = EvaluatePureData(context.math_expr().pure_data(i));
+                        if (!IsTypeCompatible(type, exprValue))
+                        {
+                            int line = context.Start.Line;
+                            string message = $"Error: type mismatch for variable '{varName}' at line {line}";
+                            _sb.AppendLine(message);
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < context.math_expr().VARIABLE_NAME().Length; i++)
+                    {
+                        string usedVarName = context.math_expr().VARIABLE_NAME(i).GetText();
+                        if (!_globalVariables.ContainsKey(usedVarName))
+                        {
+                            int line = context.Start.Line;
+                            string message = $"Error: undeclared variable '{usedVarName}' at line {line}";
+                            _sb.AppendLine(message);
+                            return false;
+                        }
+                        if (type != _globalVariables[usedVarName])
+                        {
+                            int line = context.Start.Line;
+                            string message = $"Error: type mismatch for variable '{varName}' at line {line}";
+                            _sb.AppendLine(message);
+                            return false;
+                        }
+                    }
+                }
+                if (context.function_call_expr() != null)
+                {
+                    var call = context.function_call_expr();
+                    string calledFuncName = call.VARIABLE_NAME(0).GetText();
+                    if (IsConstVariable(context, varName))
+                    {
+                        string message = $"Error: assignment to constant variable '{varName}' at line {context.Start.Line}";
+                        _sb.AppendLine(message);
+                        return false;
+                    }
+                    if (!_functionNames.Contains(calledFuncName))
+                    {
+                        int line = context.Start.Line;
+                        string message = $"Error: undeclared function '{calledFuncName}' at line {line}";
+                        _sb.AppendLine(message);
+                        return false;
+                    }
+                    var argTypes = new List<string>();
+                    for (int i = 1; i < call.ChildCount; i++)
+                    {
+                        var child = call.GetChild(i);
+                        if (child is OurCompilerParser.Pure_dataContext pd)
+                        {
+                            dynamic v = EvaluatePureData(pd);
+                            if (v is int) argTypes.Add("int");
+                            else if (v is float) argTypes.Add("float");
+                            else if (v is double) argTypes.Add("double");
+                            else if (v is string) argTypes.Add("string");
+                        }
+                        else if (child is ITerminalNode terminal && terminal.Symbol.Type == OurCompilerParser.VARIABLE_NAME)
+                        {
+                            string var = terminal.GetText();
+                            if (!_globalVariables.ContainsKey(var))
+                            {
+                                int line = context.Start.Line;
+                                string message = $"Error: undeclared variable '{var}' at line {line}";
+                                _sb.AppendLine(message);
+                                return false;
+                            }
+                            argTypes.Add(_globalVariables[var]);
+                        }
+                    }
+                    string calledSignature = calledFuncName + "(" + string.Join(", ", argTypes) + ")";
+                    if (!_functionReturnTypes.TryGetValue(calledSignature, out string returnType) && !_functionReturnTypes.TryGetValue(removeConst(calledSignature), out returnType))
+                    {
+                        int line = context.Start.Line;
+                        string message = $"Error: function '{calledFuncName}' called with incorrect argument types at line {line}";
+                        _sb.AppendLine(message);
+                        return false;
+                    }
+                    if (type != returnType)
+                    {
+                        int line = context.Start.Line;
+                        string message = $"Error: type mismatch for variable '{varName}' at line {line}";
+                        _sb.AppendLine(message);
+                        return false;
+                    }
+                }
+                _globalVariables.Add(varName, type);
+
+            }
+            else if (context.Parent.Parent.Parent is OurCompilerParser.FunctionContext func)
+            {
+                string funcName = func.VARIABLE_NAME(0).GetText();
+                funcName = functionNameConstructor(funcName, func);
+                if (IsConstVariable(context, varName))
+                {
+                    string message = $"Error: assignment to constant variable '{varName}' at line {context.Start.Line}";
+                    _sb.AppendLine(message);
+                    return false;
+                }
+                if (context.VARIABLE_NAME().Length > 1)
+                {
+
+                    string assignedVarName = context.VARIABLE_NAME(1).GetText();
+                    string assignedVarType;
+                    if (!_functions[funcName].ContainsKey(assignedVarName) && !_globalVariables.ContainsKey(assignedVarName))
+                    {
+                        int line = context.Start.Line;
+                        string message = $"Error: undeclared variable '{assignedVarName}' at line {line}";
+                        _sb.AppendLine(message);
+                        return false;
+                    }
+                    else if (!_functions[funcName].ContainsKey(assignedVarName))
+                    {
+                        assignedVarType = _globalVariables[assignedVarName];
+                    }
+                    else
+                    {
+                        assignedVarType = _functions[funcName][assignedVarName];
+                    }
+                    if (type != assignedVarType)
+                    {
+                        int line = context.Start.Line;
+                        string message = $"Error: type mismatch for variable '{varName}' at line {line}";
+                        _sb.AppendLine(message);
+                        return false;
+                    }
+                }
+                if (context.math_expr() != null)
+                {
+                    for (int i = 0; i < context.math_expr().pure_data().Length; i++)
+                    {
+                        dynamic exprValue = EvaluatePureData(context.math_expr().pure_data(i));
+                        if (!IsTypeCompatible(type, exprValue))
+                        {
+                            int line = context.Start.Line;
+                            string message = $"Error: type mismatch for variable '{varName}' at line {line}";
+                            _sb.AppendLine(message);
+                            return false;
+                        }
+                    }
+                    for (int i = 0; i < context.math_expr().VARIABLE_NAME().Length; i++)
+                    {
+                        string usedVarName = context.math_expr().VARIABLE_NAME(i).GetText();
+                        if (!_functions[funcName].ContainsKey(usedVarName))
+                        {
+                            int line = context.Start.Line;
+                            string message = $"Error: undeclared variable '{usedVarName}' at line {line}";
+                            _sb.AppendLine(message);
+                            return false;
+                        }
+                        if (type != _functions[funcName][usedVarName])
+                        {
+                            int line = context.Start.Line;
+                            string message = $"Error: type mismatch for variable '{varName}' at line {line}";
+                            _sb.AppendLine(message);
+                            return false;
+                        }
+                    }
+                }
+                if (context.function_call_expr() != null)
+                {
+                    var call = context.function_call_expr();
+                    string calledFuncName = call.VARIABLE_NAME(0).GetText();
+                    if (!_functionNames.Contains(calledFuncName))
+                    {
+                        int line = context.Start.Line;
+                        string message = $"Error: undeclared function '{calledFuncName}' at line {line}";
+                        _sb.AppendLine(message);
+                        return false;
+                    }
+                    var argTypes = new List<string>();
+                    for (int i = 1; i < call.ChildCount; i++)
+                    {
+                        var child = call.GetChild(i);
+                        if (child is OurCompilerParser.Pure_dataContext pd)
+                        {
+                            dynamic v = EvaluatePureData(pd);
+                            if (v is int) argTypes.Add("int");
+                            else if (v is float) argTypes.Add("float");
+                            else if (v is double) argTypes.Add("double");
+                            else if (v is string) argTypes.Add("string");
+                        }
+                        else if (child is ITerminalNode terminal && terminal.Symbol.Type == OurCompilerParser.VARIABLE_NAME)
+                        {
+                            string var = terminal.GetText();
+                            string varType = null;
+                            bool found = false;
+                            ParserRuleContext parent = context;
+                            while (parent != null && !(parent is OurCompilerParser.FunctionContext))
+                            {
+                                parent = parent.Parent as ParserRuleContext;
+                            }
+                            if (parent is OurCompilerParser.FunctionContext funcContext)
+                            {
+                                string funcFullName = functionNameConstructor(funcContext.VARIABLE_NAME(0).GetText(), funcContext);
+                                if (_functions[funcFullName].ContainsKey(var))
+                                {
+                                    varType = _functions[funcFullName][var];
+                                    found = true;
+                                }
+                            }
+                            if (!found && _globalVariables.ContainsKey(var))
+                            {
+                                varType = _globalVariables[var];
+                                found = true;
+                            }
+                            if (found)
+                                argTypes.Add(varType);
+                            else
+                            {
+                                int line = context.Start.Line;
+                                string message = $"Error: undeclared variable '{var}' at line {line}";
+                                _sb.AppendLine(message);
+                                return false;
+                            }
+                        }
+                    }
+                    string calledSignature = calledFuncName + "(" + string.Join(", ", argTypes) + ")";
+                    if (!_functionReturnTypes.TryGetValue(calledSignature, out string returnType) && !_functionReturnTypes.TryGetValue(removeConst(calledSignature), out returnType))
+                    {
+                        int line = context.Start.Line;
+                        string message = $"Error: function '{calledFuncName}' called with incorrect argument types at line {line}";
+                        _sb.AppendLine(message);
+                        return false;
+                    }
+                    if (type != returnType)
+                    {
+                        int line = context.Start.Line;
+                        string message = $"Error: type mismatch for variable '{varName}' at line {line}";
+                        _sb.AppendLine(message);
+                        return false;
+                    }
+                }
+                _functions[funcName].Add(varName, type);
+            }
+            return true;
+        }
         private string removeConst(string funcSignature)
         { 
             return funcSignature.Replace("const", "");
@@ -673,30 +943,10 @@ class Program
         public override string VisitVar_assign_expr([NotNull] OurCompilerParser.Var_assign_exprContext context)
         {
             string varName = context.VARIABLE_NAME(0).GetText();
-
-            if (context.pure_data() != null)
-            {
-                dynamic value = EvaluatePureData(context.pure_data());
-                if (!IsVariableDeclared(varName, context))
-                {
-                    string message = $"Error: undeclared variable '{varName}' at line {context.Start.Line}";
-                    _sb.AppendLine(message);
-                    return message + "\n";
-                }
+            dynamic value = EvaluatePureData(context.pure_data());
                 if (context.Parent is OurCompilerParser.ProgramContext)
                 {
-                    if (IsConstVariable(context, varName))
-                    {
-                        string message = $"Error: assignment to constant variable '{varName}' at line {context.Start.Line}";
-                        _sb.AppendLine(message);
-                        return message + "\n";
-                    }
-                    if (!IsTypeCompatible(_globalVariables[varName], value))
-                    {
-                        string message = $"Error: mismatched types at assignment to variable '{varName}' at line {context.Start.Line}";
-                        _sb.AppendLine(message);
-                        return message + "\n";
-                    }
+                    IsVariableInitializedCorrectly(varName, _globalVariables[varName], context);
                 }
                 else
                 {
@@ -706,8 +956,12 @@ class Program
                         _sb.AppendLine(message);
                         return message + "\n";
                     }
-                    var func = context.Parent.Parent.Parent as OurCompilerParser.FunctionContext;
-                    var funcName = functionNameConstructor(func.VARIABLE_NAME(0).GetText(), func);
+                    OurCompilerParser.FunctionContext func;
+                    if(context.Parent.Parent.Parent is OurCompilerParser.FunctionContext)
+                        func = context.Parent.Parent.Parent as OurCompilerParser.FunctionContext;
+                    else
+                        func = context.Parent.Parent.Parent.Parent.Parent as OurCompilerParser.FunctionContext;
+                var funcName = functionNameConstructor(func.VARIABLE_NAME(0).GetText(), func);
                     if (!IsTypeCompatible(_functions[funcName][varName], value))
                     {
                         string message = $"Error: mismatched types at assignment to variable '{varName}' at line {context.Start.Line}";
@@ -715,7 +969,6 @@ class Program
                         return message + "\n";
                     }
                 }
-            }
             return "";
         }
         private bool IsConstVariable(OurCompilerParser.Var_assign_exprContext context, string varName)
@@ -729,7 +982,11 @@ class Program
             }
             else
             {
-                var func = context.Parent.Parent.Parent as OurCompilerParser.FunctionContext;
+                OurCompilerParser.FunctionContext func;
+                if (context.Parent.Parent.Parent is OurCompilerParser.FunctionContext)
+                    func = context.Parent.Parent.Parent as OurCompilerParser.FunctionContext;
+                else
+                    func = context.Parent.Parent.Parent.Parent.Parent as OurCompilerParser.FunctionContext;
                 var funcName = functionNameConstructor(func.VARIABLE_NAME(0).GetText(), func);
                 if (_functions[funcName][varName].StartsWith("const"))
                     return true;
@@ -761,6 +1018,8 @@ class Program
         }
         private dynamic EvaluatePureData(OurCompilerParser.Pure_dataContext pureData)
         {
+            if (pureData is null)
+                return null;
             if (pureData.INT_NUMBER() is not null)
             {
                 return int.Parse(pureData.INT_NUMBER().GetText());
