@@ -202,7 +202,7 @@ class Program
 
     class ErrorVisitor : OurCompilerBaseVisitor<string>
     {
-        private Regex typeDef = new Regex("^((const )?int|float|double|string)$|^void$");
+        private Regex typeDef = new Regex("^((const)?int|float|double|string)$|^void$");
 
         private readonly StringBuilder _sb = new StringBuilder();
         private Dictionary<string, string> _globalVariables = new Dictionary<string, string>();
@@ -462,7 +462,7 @@ class Program
                         }
                     }
                     string calledSignature = calledFuncName + "(" + string.Join(", ", argTypes) + ")";
-                    if (!_functionReturnTypes.TryGetValue(calledSignature, out string returnType))
+                    if (!_functionReturnTypes.TryGetValue(calledSignature, out string returnType) && !_functionReturnTypes.TryGetValue(removeConst(calledSignature), out returnType))
                     {
                         int line = context.Start.Line;
                         string message = $"Error: function '{calledFuncName}' called with incorrect argument types at line {line}";
@@ -610,7 +610,7 @@ class Program
                         }
                     }
                     string calledSignature = calledFuncName + "(" + string.Join(", ", argTypes) + ")";
-                    if (!_functionReturnTypes.TryGetValue(calledSignature, out string returnType))
+                    if (!_functionReturnTypes.TryGetValue(calledSignature, out string returnType) && !_functionReturnTypes.TryGetValue(removeConst(calledSignature), out returnType))
                     {
                         int line = context.Start.Line;
                         string message = $"Error: function '{calledFuncName}' called with incorrect argument types at line {line}";
@@ -628,6 +628,10 @@ class Program
                 _functions[funcName].Add(varName, type);
             }
             return true;
+        }
+        private string removeConst(string funcSignature)
+        { 
+            return funcSignature.Replace("const", "");
         }
         public override string VisitVar_decl_assg_expr([NotNull] OurCompilerParser.Var_decl_assg_exprContext context)
         {
@@ -681,6 +685,12 @@ class Program
                 }
                 if (context.Parent is OurCompilerParser.ProgramContext)
                 {
+                    if (IsConstVariable(context, varName))
+                    {
+                        string message = $"Error: assignment to constant variable '{varName}' at line {context.Start.Line}";
+                        _sb.AppendLine(message);
+                        return message + "\n";
+                    }
                     if (!IsTypeCompatible(_globalVariables[varName], value))
                     {
                         string message = $"Error: mismatched types at assignment to variable '{varName}' at line {context.Start.Line}";
@@ -690,6 +700,12 @@ class Program
                 }
                 else
                 {
+                    if (IsConstVariable(context, varName))
+                    {
+                        string message = $"Error: assignment to constant variable '{varName}' at line {context.Start.Line}";
+                        _sb.AppendLine(message);
+                        return message + "\n";
+                    }
                     var func = context.Parent.Parent.Parent as OurCompilerParser.FunctionContext;
                     var funcName = functionNameConstructor(func.VARIABLE_NAME(0).GetText(), func);
                     if (!IsTypeCompatible(_functions[funcName][varName], value))
@@ -700,15 +716,26 @@ class Program
                     }
                 }
             }
-
-            /*if (!IsTypeCompatible(type, value))
-            {
-                int line = context.Start.Line;
-                string message = $"Error: type mismatch for variable '{varName}' at line {line}";
-                _sb.AppendLine(message);
-                return message + "\n";
-            }*/
             return "";
+        }
+        private bool IsConstVariable(OurCompilerParser.Var_assign_exprContext context, string varName)
+        {
+            if (context.Parent is OurCompilerParser.ProgramContext)
+            {
+                if (_globalVariables[varName].StartsWith("const"))
+                    return true;
+                else
+                    return false;
+            }
+            else
+            {
+                var func = context.Parent.Parent.Parent as OurCompilerParser.FunctionContext;
+                var funcName = functionNameConstructor(func.VARIABLE_NAME(0).GetText(), func);
+                if (_functions[funcName][varName].StartsWith("const"))
+                    return true;
+                else
+                    return false;
+            }
         }
         private bool IsTypeCompatible(string type, dynamic value)
         {
