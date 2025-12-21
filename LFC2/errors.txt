@@ -1,15 +1,14 @@
-Error: type mismatch for variable 'a' at line 14
-Error: duplicated 'main' function defined at line 59
+Error: type mismatch for variable 'a' at line 15
+Error: duplicated 'main' function defined at line 61
 Error: duplicated variable 'a' at line 8
-Error: type mismatch for variable 'd' at line 21
-Error: type mismatch for variable 'ana2' at line 25
-Error: type mismatch for variable 'b' at line 27
-Error: function 'suma' called with incorrect argument types at line 30
-Error: type mismatch for variable 's' at line 40
-Error: undeclared function 'diferenta' at line 41
-Error: type mismatch for variable 'sum' at line 42
-Error: function 'suma' called with incorrect argument types at line 43
+Error: type mismatch for variable 'd' at line 22
+Error: type mismatch for variable 'ana2' at line 26
+Error: function 'suma' called with incorrect argument types at line 32
+Error: type mismatch for variable 's' at line 42
+Error: undeclared function 'diferenta' at line 43
+Error: type mismatch for variable 'sum' at line 44
 Error: function 'suma' called with incorrect argument types at line 45
-Error: type mismatch for variable 'doub' at line 46
-Error: function 'suma' called with incorrect number of arguments at line 48
-Error: type mismatch in return statement at line 56
+Error: function 'suma' called with incorrect argument types at line 47
+Error: type mismatch for variable 'doub' at line 48
+Error: function 'suma' called with incorrect number of arguments at line 50
+Error: type mismatch in return statement at line 58

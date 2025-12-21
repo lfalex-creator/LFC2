@@ -204,7 +204,7 @@ class Program
 
     class ErrorVisitor : OurCompilerBaseVisitor<string>
     {
-        private Regex typeDef = new Regex("^((const)?int|float|double|string)$|^void$");
+        private Regex typeDef = new Regex("^((const)?(int|float|double|string))$|^void$");
 
         private readonly StringBuilder _sb = new StringBuilder();
         private Dictionary<string, string> _globalVariables = new Dictionary<string, string>();
@@ -826,6 +826,7 @@ class Program
                             if (IsCompatibleWithOverloads(function.Key.Substring(0, function.Key.IndexOf('(')), argTypes, context))
                             {
                                 ok = true;
+                                returnType= _functionReturnTypes[function.Key];
                                 break;
                             }
                         if (!ok)
@@ -836,7 +837,7 @@ class Program
                             return false;
                         }
                     }
-                    if (type != returnType)
+                    if (removeConst(type) != removeConst(returnType))
                     {
                         int line = context.Start.Line;
                         string message = $"Error: type mismatch for variable '{varName}' at line {line}";
@@ -908,7 +909,7 @@ class Program
                             _sb.AppendLine(message);
                             return false;
                         }
-                        if (type != _functions[funcName][usedVarName])
+                        if (type != _functions[funcName][usedVarName] && type != removeConst(_functions[funcName][usedVarName]))
                         {
                             int line = context.Start.Line;
                             string message = $"Error: type mismatch for variable '{varName}' at line {line}";
@@ -982,7 +983,10 @@ class Program
                         foreach (var function in _functions)
                             if (IsCompatibleWithOverloads(function.Key.Substring(0, function.Key.IndexOf('(')), argTypes, context))
                             {
+                                if (_functionReturnTypes[function.Key]=="void")
+                                    continue;
                                 ok = true;
+                                returnType=_functionReturnTypes[function.Key];
                                 break;
                             }
                         if (!ok)
@@ -993,7 +997,7 @@ class Program
                             return false;
                         }
                     }
-                    if (type != returnType)
+                    if (removeConst(type) != removeConst(returnType))
                     {
                         int line = context.Start.Line;
                         string message = $"Error: type mismatch for variable '{varName}' at line {line}";

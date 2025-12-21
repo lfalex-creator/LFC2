@@ -6,6 +6,7 @@ int z = 10;
 void suma(int a,int b)
 {
 	int a;
+	b=3;
 	suma(a,b);
 }
 
@@ -24,7 +25,8 @@ int main()
 	string ana2;
 	ana2=suma(xoy,test);
 	string b;
-	b=suma(2.22f,3.14f);
+	float alttest;
+	alttest=suma(2.22f,3.14f);
 	for(int i=1;i<=5;i++)
 	{
 		suma("xx","yy");
@@ -50,7 +52,7 @@ int main()
 }
 
 
-float suma(double a, double b)
+const float suma(const double a, const double b)
 {
 	int c = 0;
 	return a+b;

@@ -14,16 +14,16 @@ Nume: main
 Tip: main, iterativa
 Tip returnat: int
 Parametri: {}
-Strucuturi repetitive: <for,28>, <while,32>
-Structuri decizionale: <if-else,35>
-Variabile locale: (int, c, ), (float, f, 22.15f), (int, s, 0), (int, d, "ana"), (int, xoy, 1), (constint, test, 5), (string, ana2, ), (string, b, ), (int, i, 1), (int, sum, suma(s,x)), (double, doub, suma(f,f)), (float, integer, 2)
+Strucuturi repetitive: <for,30>, <while,34>
+Structuri decizionale: <if-else,37>
+Variabile locale: (int, c, ), (float, f, 22.15f), (int, s, 0), (int, d, "ana"), (int, xoy, 1), (constint, test, 5), (string, ana2, ), (string, b, ), (float, alttest, ), (int, i, 1), (int, sum, suma(s,x)), (double, doub, suma(f,f)), (float, integer, 2)
 >
 
 <
 Nume: suma
 Tip: non-main, iterativa
-Tip returnat: float
-Parametri: {double a, double b}
+Tip returnat: constfloat
+Parametri: {a ,, b ), intc=0;returna+b; }}
 Strucuturi repetitive: none
 Structuri decizionale: none
 Variabile locale: (int, c, 0)
